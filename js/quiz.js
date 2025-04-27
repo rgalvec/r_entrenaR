@@ -3,8 +3,10 @@ import { originalQuizData } from './questions.js';
 
 // Variables globales para el estado del quiz
 let shuffledQuizData = []; // Array para almacenar las preguntas aleatorizadas para la sesión actual
-let currentQuestionIndex = 0; // Índice de la pregunta actual
+let currentQuestionIndex = 0; // Índice de la pregunta actual (pregunta actual que se está mostrando)
 let score = 0; // Puntaje del usuario (solo correctas)
+let attemptedQuestionsCount = 0; // Contador de preguntas que han sido intentadas (respondidas o tiempo agotado)
+
 let timerInterval; // Variable para almacenar el intervalo del temporizador
 let totalQuizTime = 60; // Tiempo total en segundos para todo el quiz (configurable)
 let numberOfQuestions = 10; // Cantidad de preguntas a mostrar (configurable)
@@ -241,6 +243,9 @@ function checkAnswer() {
 	explanationElement.textContent = explanation;
 	feedbackAreaElement.appendChild(explanationElement);
 
+	// Incrementar el contador de preguntas intentadas
+	attemptedQuestionsCount++;
+
 	// Ocultar el botón de responder y mostrar el de siguiente
 	submitButton.classList.add('hidden');
 	// Solo mostrar el botón siguiente si el tiempo no se ha agotado
@@ -260,7 +265,7 @@ function checkAnswer() {
 function nextQuestion() {
 	if (!quizActive) return; // No pasar de pregunta si el quiz no está activo
 
-	currentQuestionIndex++; // Incrementar el índice de la pregunta
+	currentQuestionIndex++; // Incrementar el índice de la pregunta mostrada
 
 	// Verificar si hay más preguntas (en el array mezclado, hasta el límite configurado) y si el tiempo no se ha agotado
 	if (currentQuestionIndex < numberOfQuestions && currentQuestionIndex < shuffledQuizData.length && timeLeft > 0) {
@@ -272,18 +277,11 @@ function nextQuestion() {
 
 // Función para actualizar la visualización del puntaje
 function updateScoreDisplay() {
-	// currentQuestionIndex es el número de preguntas que ya se han mostrado.
-	// Si el botón "Responder" está visible, significa que la pregunta actual aún no se ha respondido,
-	// por lo que el número de intentadas es igual al índice actual.
-	// Si el botón "Siguiente Pregunta" está visible, significa que la pregunta actual ya se respondió,
-	// por lo que el número de intentadas es el índice actual + 1.
-	const attempted = currentQuestionIndex + (nextButton.classList.contains('hidden') ? 0 : 1);
-
 	const correct = score;
-	const incorrect = attempted - correct;
+	const incorrect = attemptedQuestionsCount - correct; // Usar el contador de intentadas
 
 	// Actualizar el texto de los botones de puntaje
-	scoreAttemptedButton.textContent = `Intentadas: ${attempted}`;
+	scoreAttemptedButton.textContent = `Intentadas: ${attemptedQuestionsCount}`;
 	scoreCorrectButton.textContent = `Correctas: ${correct}`;
 	scoreIncorrectButton.textContent = `Incorrectas: ${incorrect}`;
 }
@@ -314,8 +312,8 @@ function endQuiz(timeRanOut) {
 		endTitle.textContent = '¡Entrenamiento Finalizado!'; // Cambiar texto
 	}
 
-	// Calcular el puntaje final detallado
-	const totalAttempted = currentQuestionIndex; // Total de preguntas que se intentaron
+	// Calcular el puntaje final detallado (usando el contador de intentadas)
+	const totalAttempted = attemptedQuestionsCount;
 	const finalCorrect = score;
 	const finalIncorrect = totalAttempted - finalCorrect;
 
@@ -739,6 +737,8 @@ function startNewQuiz() {
 	currentQuestionIndex = 0;
 	score = 0;
 	quizActive = true;
+	attemptedQuestionsCount = 0; // Reiniciar contador de intentadas
+
 
 	// Mezclar las preguntas (solo el número configurado)
 	shuffledQuizData = shuffleArray([...originalQuizData]).slice(0, numberOfQuestions);
@@ -783,6 +783,8 @@ function restartQuiz() {
 	currentQuestionIndex = 0; // Reiniciar índice de pregunta
 	score = 0; // Reiniciar puntaje
 	quizActive = true; // Marcar el quiz como activo
+	attemptedQuestionsCount = 0; // Reiniciar contador de intentadas
+
 
 	// Mezclar las preguntas nuevamente al reiniciar (usando el número configurado)
 	shuffledQuizData = shuffleArray([...originalQuizData]).slice(0, numberOfQuestions);
@@ -924,4 +926,3 @@ window.onload = () => {
 	// startGlobalTimer(); // Eliminado
 	// loadQuestion(); // Eliminado
 };
-

@@ -1,825 +1,863 @@
-    /* Estilos base para el modo claro */
-    body {
-    	font-family: "Inter", sans-serif;
-    	background-color: #f4f7f6;
-    	color: #333;
-    	/* Texto oscuro por defecto */
-    	display: flex;
-    	justify-content: center;
-    	align-items: center;
-    	min-height: 100vh;
-    	padding: 20px;
-    	transition: background-color 0.3s ease, color 0.3s ease;
-    	/* Transición suave para cambio de modo */
-    }
-
-    .quiz-container {
-    	background-color: #ffffff;
-    	/* Fondo blanco */
-    	padding: 30px;
-    	border-radius: 15px;
-    	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    	max-width: 700px;
-    	width: 100%;
-    	text-align: center;
-    	position: relative;
-    	/* Necesario para posicionar el botón de modo oscuro */
-    	transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    	/* Transición suave */
-    }
-
-    .app-title {
-    	font-size: 2.5em;
-    	/* Título más grande */
-    	font-weight: bold;
-    	margin-bottom: 5px;
-    	/* Espacio antes del subtítulo */
-    	color: #333;
-    }
-
-    .app-subtitle {
-    	font-size: 1em;
-    	color: #555;
-    	margin-bottom: 20px;
-    	/* Espacio después del subtítulo */
-    }
-
-    .question {
-    	margin-bottom: 20px;
-    	font-size: 1.1em;
-    	font-weight: bold;
-    	color: #333;
-    	text-align: left;
-    }
-
-    .options {
-    	text-align: left;
-    }
-
-    .options label {
-    	display: flex;
-    	align-items: center;
-    	margin-bottom: 10px;
-    	padding: 10px;
-    	border: 1px solid #ddd;
-    	border-radius: 8px;
-    	cursor: pointer;
-    	transition: background-color 0.3s ease, border-color 0.3s ease;
-    	position: relative;
-    	padding-left: 35px;
-    	color: #333;
-    	/* Color de texto por defecto */
-    }
-
-    .options label:hover {
-    	background-color: #ffeacc;
-    	/* Naranja claro para hover */
-    	border-color: #ff9800;
-    	/* Naranja para el borde en hover */
-    }
-
-    /* Ocultar el radio button nativo */
-    .options input[type="radio"] {
-    	position: absolute;
-    	opacity: 0;
-    	cursor: pointer;
-    	height: 0;
-    	width: 0;
-    }
-
-    /* Crear el cuadrado personalizado */
-    .options label::before {
-    	content: '';
-    	position: absolute;
-    	left: 10px;
-    	top: 50%;
-    	transform: translateY(-50%);
-    	width: 20px;
-    	height: 20px;
-    	border: 2px solid #007bff;
-    	border-radius: 4px;
-    	background-color: #fff;
-    	transition: all 0.3s ease;
-    }
-
-    /* Estilo para el cuadrado cuando el radio button está seleccionado */
-    .options input[type="radio"]:checked+label::before {
-    	background-color: #007bff;
-    	border-color: #007bff;
-    }
-
-    /* Estilo para el punto interior del cuadrado */
-    .options label::after {
-    	content: '';
-    	position: absolute;
-    	left: 16px;
-    	top: 50%;
-    	transform: translateY(-50%);
-    	width: 8px;
-    	height: 8px;
-    	border-radius: 50%;
-    	background-color: #fff;
-    	opacity: 0;
-    	transition: opacity 0.3s ease;
-    }
-
-    /* Mostrar el punto interior cuando el radio button está seleccionado */
-    .options input[type="radio"]:checked+label::after {
-    	opacity: 1;
-    }
-
-
-    .feedback {
-    	margin-top: 20px;
-    	padding: 15px;
-    	border-radius: 8px;
-    	text-align: left;
-    }
-
-    .feedback.correct {
-    	background-color: #d4edda;
-    	color: #155724;
-    	border-color: #c3e6cb;
-    }
-
-    .feedback.incorrect {
-    	background-color: #f8d7da;
-    	color: #721c24;
-    	border-color: #f5c6cb;
-    }
-
-    .feedback.warning {
-    	background-color: #fff3cd;
-    	color: #856404;
-    	border-color: #ffeeba;
-    }
-
-    .explanation {
-    	margin-top: 10px;
-    	font-size: 0.95em;
-    	color: #555;
-    }
-
-    .score-container {
-    	margin-top: 20px;
-    	text-align: center;
-    	display: flex;
-    	justify-content: center;
-    	gap: 10px;
-    	flex-wrap: wrap;
-    }
-
-    .score-button {
-    	font-size: 1em;
-    	font-weight: bold;
-    	padding: 8px 15px;
-    	border-radius: 8px;
-    	border: none;
-    	color: #ffffff;
-    	display: inline-block;
-    }
-
-    .score-button.attempted {
-    	background-color: #007bff;
-    	/* Azul para Intentadas */
-    }
-
-    .score-button.correct {
-    	background-color: #28a745;
-    	/* Verde para Correctas */
-    }
-
-    .score-button.incorrect {
-    	background-color: #ff9800;
-    	/* Naranja para Incorrectas */
-    }
-
-
-    .button {
-    	@apply text-white font-bold py-2 px-4 rounded-lg mt-4 transition duration-0;
-    	/* Transición más rápida */
-    	width: auto;
-    	display: block;
-    	margin-left: auto;
-    	margin-right: auto;
-    	background-color: #007bff;
-    	color: #ffffff;
-    	border: 2px solid #0056b3;
-    	cursor: pointer;
-    	text-decoration: none;
-    	padding: 10px 20px;
-    }
-
-    .button:disabled {
-    	@apply bg-gray-400 hover:bg-gray-400 cursor-not-allowed;
-    	border-color: #6b7280;
-    }
-
-    .button:hover:not(:disabled) {
-    	background-color: #0056b3;
-    	border-color: #003f80;
-    }
-
-    /* Estilo para el mensaje final del quiz */
-    .quiz-container h2 {
-    	color: #007bff;
-    }
-
-
-    .timer {
-    	font-size: 1.5em;
-    	font-weight: bold;
-    	color: #ff9800;
-    	margin-bottom: 15px;
-    	padding: 10px;
-    	border: 2px solid #ff9800;
-    	border-radius: 8px;
-    	display: inline-block;
-    }
-
-    .end-message {
-    	margin-top: 20px;
-    	margin-bottom: 20px;
-    	font-size: 1.1em;
-    	color: #333;
-    }
-
-    .summary-section {
-    	margin-top: 30px;
-    	padding-top: 20px;
-    	border-top: 1px solid #eee;
-    	text-align: left;
-    }
-
-    body.dark-mode .summary-section {
-    	border-top-color: #4a5568;
-    	/* Borde separador oscuro */
-    }
-
-
-    .summary-section h3 {
-    	font-size: 1.2em;
-    	font-weight: bold;
-    	margin-bottom: 15px;
-    	color: #007bff;
-    	text-align: center;
-    }
-
-    body.dark-mode .summary-section h3 {
-    	color: #007bff;
-    	/* Azul para título del resumen */
-    }
-
-    .summary-item {
-    	margin-bottom: 20px;
-    	padding: 15px;
-    	background-color: #f9f9f9;
-    	border-radius: 8px;
-    	border: 1px solid #eee;
-    }
-
-    body.dark-mode .summary-item {
-    	background-color: #2d3748;
-    	border-color: #4a5568;
-    }
-
-
-    .summary-item strong {
-    	color: #333;
-    }
-
-    body.dark-mode .summary-item strong {
-    	color: #e2e8f0;
-    	/* Texto de pregunta claro */
-    }
-
-
-    .summary-item .correct-answer {
-    	margin-top: 5px;
-    	font-weight: bold;
-    	color: #155724;
-    }
-
-    body.dark-mode .summary-item .correct-answer {
-    	color: #48bb78;
-    	/* Verde en modo oscuro */
-    }
-
-
-    .summary-item .explanation {
-    	margin-top: 5px;
-    	font-size: 0.9em;
-    	color: #555;
-    }
-
-    body.dark-mode .summary-item .explanation {
-    	color: #cbd5e0;
-    	/* Texto de explicación claro */
-    }
-
-
-    /* Estilos para el modo oscuro */
-    body.dark-mode {
-    	background-color: #1a202c;
-    	/* Fondo oscuro */
-    	color: #e2e8f0;
-    	/* Texto claro */
-    }
-
-    body.dark-mode .quiz-container {
-    	background-color: #2d3748;
-    	/* Fondo oscuro para el contenedor */
-    	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    }
-
-    body.dark-mode .app-title {
-    	/* Ajustar color del título principal en modo oscuro */
-    	color: #e2e8f0;
-    }
-
-    body.dark-mode .app-subtitle {
-    	color: #b0b0b0;
-    }
-
-
-    body.dark-mode .question {
-    	color: #e2e8f0;
-    	/* Texto de pregunta claro */
-    }
-
-    body.dark-mode .options label {
-    	border-color: #4a5568;
-    	/* Borde más oscuro */
-    	color: #e2e8f0;
-    	/* Texto de opción claro */
-    }
-
-    body.dark-mode .options label:hover {
-    	background-color: #4a5568;
-    	/* Fondo oscuro en hover */
-    	border-color: #007bff;
-    	/* Borde azul en hover */
-    }
-
-    body.dark-mode .options label::before {
-    	border-color: #007bff;
-    	/* Borde azul */
-    	background-color: #2d3748;
-    	/* Fondo oscuro */
-    }
-
-    body.dark-mode .options input[type="radio"]:checked+label::before {
-    	background-color: #007bff;
-    	/* Fondo azul seleccionado */
-    	border-color: #007bff;
-    }
-
-    body.dark-mode .options label::after {
-    	background-color: #e2e8f0;
-    	/* Punto interior claro */
-    }
-
-    body.dark-mode .feedback.correct {
-    	background-color: #48bb78;
-    	/* Verde más oscuro */
-    	color: #1a202c;
-    	/* Texto oscuro */
-    	border-color: #38a169;
-    }
-
-    body.dark-mode .feedback.incorrect {
-    	background-color: #f56565;
-    	/* Rojo más oscuro */
-    	color: #1a202c;
-    	/* Texto oscuro */
-    	border-color: #e53e3e;
-    }
-
-    body.dark-mode .feedback.warning {
-    	background-color: #f6e05e;
-    	/* Amarillo más oscuro */
-    	color: #2d3748;
-    	/* Texto oscuro */
-    	border-color: #d69e2e;
-    }
-
-    body.dark-mode .explanation {
-    	color: #cbd5e0;
-    	/* Texto de explicación claro */
-    }
-
-    body.dark-mode .quiz-container h2 {
-    	color: #007bff;
-    	/* Azul para título final */
-    }
-
-    body.dark-mode .quiz-container .score-button.attempted {
-    	background-color: #007bff;
-    	/* Azul para Intentadas */
-    }
-
-    body.dark-mode .quiz-container .score-button.correct {
-    	background-color: #48bb78;
-    	/* Verde en modo oscuro */
-    }
-
-    body.dark-mode .quiz-container .score-button.incorrect {
-    	background-color: #ff9800;
-    	/* Naranja en modo oscuro */
-    }
-
-    body.dark-mode .timer {
-    	color: #ff9800;
-    	/* Naranja para el temporizador */
-    	border-color: #ff9800;
-    }
-
-    body.dark-mode .end-message {
-    	color: #e2e8f0;
-    	/* Texto claro */
-    }
-
-    body.dark-mode .summary-section {
-    	border-top-color: #4a5568;
-    	/* Borde separador oscuro */
-    }
-
-    body.dark-mode .summary-section h3 {
-    	color: #007bff;
-    	/* Azul para título del resumen */
-    }
-
-    body.dark-mode .summary-item {
-    	background-color: #2d3748;
-    	border-color: #4a5568;
-    }
-
-    body.dark-mode .summary-item strong {
-    	color: #e2e8f0;
-    	/* Texto de pregunta claro */
-    }
-
-    body.dark-mode .summary-item .correct-answer {
-    	color: #48bb78;
-    	/* Verde en modo oscuro */
-    }
-
-    body.dark-mode .summary-item .explanation {
-    	color: #cbd5e0;
-    	/* Texto de explicación claro */
-    }
-
-    /* Estilo para el botón de modo oscuro */
-    #dark-mode-toggle {
-    	position: absolute;
-    	top: 15px;
-    	right: 15px;
-    	background-color: #007bff;
-    	/* Fondo azul */
-    	color: white;
-    	border: none;
-    	border-radius: 50%;
-    	/* Botón redondo */
-    	width: 35px;
-    	height: 35px;
-    	font-size: 1em;
-    	cursor: pointer;
-    	display: flex;
-    	justify-content: center;
-    	align-items: center;
-    	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    	transition: background-color 0.3s ease, transform 0.2s ease;
-    	z-index: 10;
-    	/* Asegurar que esté por encima de otros elementos */
-    }
-
-    #dark-mode-toggle:hover {
-    	background-color: #0056b3;
-    	/* Azul más oscuro en hover */
-    	transform: scale(1.05);
-    }
-
-    body.dark-mode #dark-mode-toggle {
-    	background-color: #007bff;
-    	/* Mantener azul en modo oscuro */
-    	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    body.dark-mode #dark-mode-toggle:hover {
-    	background-color: #0056b3;
-    	/* Mantener azul más oscuro en hover */
-    }
-
-    /* Estilos para las pestañas */
-    .tabs {
-    	display: flex;
-    	margin-bottom: 20px;
-    	border-bottom: 1px solid #ddd;
-    }
-
-    body.dark-mode .tabs {
-    	border-bottom-color: #4a5568;
-    }
-
-    .tab-button {
-    	padding: 10px 20px;
-    	cursor: pointer;
-    	border: none;
-    	background-color: transparent;
-    	font-size: 1.1em;
-    	font-weight: bold;
-    	color: #555;
-    	border-bottom: 2px solid transparent;
-    	transition: color 0.3s ease, border-bottom-color 0.3s ease;
-    }
-
-    body.dark-mode .tab-button {
-    	color: #b0b0b0;
-    }
-
-    .tab-button:hover {
-    	color: #007bff;
-    	border-bottom-color: #007bff;
-    }
-
-    body.dark-mode .tab-button:hover {
-    	color: #007bff;
-    	border-bottom-color: #007bff;
-    }
-
-
-    .tab-button.active {
-    	color: #007bff;
-    	border-bottom-color: #007bff;
-    }
-
-    body.dark-mode .tab-button.active {
-    	color: #007bff;
-    	border-bottom-color: #007bff;
-    }
-
-
-    .tab-content {
-    	display: none;
-    	/* Ocultar contenido de pestaña por defecto */
-    	padding-top: 20px;
-    }
-
-    .tab-content.active {
-    	display: block;
-    	/* Mostrar contenido de la pestaña activa */
-    }
-
-
-    /* Mensaje de usabilidad para el progreso */
-    .usability-message {
-    	font-size: 0.85em;
-    	color: #555;
-    	margin-top: 20px;
-    	text-align: center;
-    }
-
-    body.dark-mode .usability-message {
-    	color: #b0b0b0;
-    	/* Gris claro */
-    }
-
-    /* Contenedor para el historial de sesiones */
-    .session-history-container {
-    	margin-top: 30px;
-    	padding-top: 20px;
-    	border-top: 1px solid #eee;
-    	text-align: left;
-    }
-
-    body.dark-mode .session-history-container {
-    	border-top-color: #424242;
-    }
-
-    .session-history-container h3 {
-    	font-size: 1.2em;
-    	font-weight: bold;
-    	margin-bottom: 15px;
-    	color: #007bff;
-    	text-align: center;
-    }
-
-    body.dark-mode .session-history-container h3 {
-    	color: #007bff;
-    	/* Azul */
-    }
-
-    .session-item {
-    	margin-bottom: 15px;
-    	padding: 15px;
-    	background-color: #f9f9f9;
-    	border-radius: 8px;
-    	border: 1px solid #eee;
-    }
-
-    body.dark-mode .session-item {
-    	background-color: #2d2d2d;
-    	border-color: #424242;
-    }
-
-    .session-item p {
-    	margin-bottom: 5px;
-    	color: #333;
-    }
-
-    body.dark-mode .session-item p {
-    	color: #e0e0e0;
-    	/* Texto claro */
-    }
-
-    .session-item .score-detail {
-    	font-size: 0.95em;
-    	color: #555;
-    }
-
-    body.dark-mode .session-item .score-detail {
-    	color: #b0b0b0;
-    	/* Gris claro */
-    }
-
-    /* Estilos para el área del gráfico */
-    .progress-chart-container {
-    	margin-top: 30px;
-    	padding-top: 20px;
-    	border-top: 1px solid #eee;
-    	text-align: center;
-    }
-
-    body.dark-mode .progress-chart-container {
-    	border-top-color: #424242;
-    }
-
-    .progress-chart-container h3 {
-    	font-size: 1.2em;
-    	font-weight: bold;
-    	margin-bottom: 15px;
-    	color: #007bff;
-    }
-
-    body.dark-mode .progress-chart-container h3 {
-    	color: #007bff;
-    	/* Azul */
-    }
-
-    .progress-chart-container svg {
-    	background-color: #f9f9f9;
-    	/* Fondo claro para el gráfico */
-    	border-radius: 8px;
-    	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    body.dark-mode .progress-chart-container svg {
-    	background-color: #2d2d2d;
-    	/* Fondo oscuro para el gráfico */
-    	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .progress-chart-container .axis text {
-    	font-size: 0.8em;
-    	fill: #333;
-    	/* Color de texto del eje */
-    }
-
-    body.dark-mode .progress-chart-container .axis text {
-    	fill: #e0e0e0;
-    	/* Color de texto del eje en modo oscuro */
-    }
-
-    .progress-chart-container .axis path,
-    .progress-chart-container .axis line {
-    	stroke: #888;
-    	/* Color de las líneas del eje */
-    }
-
-    body.dark-mode .progress-chart-container .axis path,
-    body.dark-mode .progress-chart-container .axis line {
-    	stroke: #b0b0b0;
-    	/* Color de las líneas del eje en modo oscuro */
-    }
-
-    .progress-chart-container .line-correct {
-    	fill: none;
-    	stroke: #4caf50;
-    	/* Verde para línea correcta */
-    	stroke-width: 2;
-    }
-
-    .progress-chart-container .line-incorrect {
-    	fill: none;
-    	stroke: #ff9800;
-    	/* Naranja para línea incorrecta */
-    	stroke-width: 2;
-    }
-
-    .progress-chart-container .dot {
-    	fill: white;
-    	/* Fondo blanco para los puntos */
-    	stroke: #333;
-    	/* Borde oscuro para los puntos */
-    }
-
-    body.dark-mode .progress-chart-container .dot {
-    	fill: #1a202c;
-    	/* Fondo oscuro para los puntos */
-    	stroke: #e2e8f0;
-    	/* Borde claro para los puntos */
-    }
-
-
-    /* Eliminar estilos de tooltip si no se usa */
-    /*
-      .progress-chart-container .tooltip {
-          position: absolute;
-          text-align: center;
-          padding: 8px;
-          font: 12px sans-serif;
-          background: lightsteelblue;
-          border: 0px;
-          border-radius: 8px;
-          pointer-events: none;
-          color: #333;
-          z-index: 100;
-      }
-      */
-
-    /* Estilos para la sección de configuración */
-    .config-section {
-    	margin-top: 20px;
-    	text-align: left;
-    	padding: 20px;
-    	border: 1px solid #eee;
-    	border-radius: 8px;
-    	background-color: #f9f9f9;
-    }
-
-    body.dark-mode .config-section {
-    	border-color: #4a5568;
-    	background-color: #2d3748;
-    }
-
-    .config-section h3 {
-    	font-size: 1.2em;
-    	font-weight: bold;
-    	margin-bottom: 15px;
-    	color: #007bff;
-    	text-align: center;
-    }
-
-    body.dark-mode .config-section h3 {
-    	color: #007bff;
-    }
-
-    .config-item {
-    	margin-bottom: 15px;
-    }
-
-    .config-item label {
-    	display: block;
-    	font-weight: bold;
-    	margin-bottom: 5px;
-    	color: #333;
-    }
-
-    body.dark-mode .config-item label {
-    	color: #e2e8f0;
-    }
-
-    .config-item input[type="number"] {
-    	width: 80px;
-    	padding: 8px;
-    	border: 1px solid #ccc;
-    	border-radius: 4px;
-    	background-color: #fff;
-    	color: #333;
-    }
-
-    body.dark-mode .config-item input[type="number"] {
-    	border-color: #4a5568;
-    	background-color: #1a202c;
-    	color: #e2e8f0;
-    }
-
-    .start-button {
-    	/* Reutilizar estilos del botón general pero con posibles ajustes */
-    	@apply bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mt-4 transition duration-0;
-    	background-color: #28a745;
-    	/* Verde */
-    	border-color: #218838;
-    	/* Verde más oscuro */
-    }
-
-    body.dark-mode .start-button {
-    	background-color: #48bb78;
-    	/* Verde en modo oscuro */
-    	border-color: #38a169;
-    }
-
-    body.dark-mode .start-button:hover {
-    	background-color: #38a169;
-    	border-color: #2b7d4b;
-    }
+/* Estilos base para el modo claro */
+body {
+	font-family: "Inter", sans-serif;
+	background-color: #f4f7f6;
+	color: #333;
+	/* Texto oscuro por defecto */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	padding: 20px;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	/* Transición suave para cambio de modo */
+}
+
+.quiz-container {
+	background-color: #ffffff;
+	/* Fondo blanco */
+	padding: 30px;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	max-width: 700px;
+	width: 100%;
+	text-align: center;
+	position: relative;
+	/* Necesario para posicionar el botón de modo oscuro */
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	/* Transición suave */
+}
+
+.app-title {
+	font-size: 2.5em;
+	/* Título más grande */
+	font-weight: bold;
+	margin-bottom: 5px;
+	/* Espacio antes del subtítulo */
+	color: #333;
+}
+
+.app-subtitle {
+	font-size: 1em;
+	color: #555;
+	margin-bottom: 20px;
+	/* Espacio después del subtítulo */
+}
+
+.question {
+	margin-bottom: 20px;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #333;
+	text-align: left;
+}
+
+.options {
+	text-align: left;
+}
+
+.options label {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	position: relative;
+	padding-left: 35px;
+	color: #333;
+	/* Color de texto por defecto */
+}
+
+.options label:hover {
+	background-color: #ffeacc;
+	/* Naranja claro para hover */
+	border-color: #ff9800;
+	/* Naranja para el borde en hover */
+}
+
+/* Ocultar el radio button nativo */
+.options input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+/* Crear el cuadrado personalizado */
+.options label::before {
+	content: '';
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 20px;
+	height: 20px;
+	border: 2px solid #007bff;
+	border-radius: 4px;
+	background-color: #fff;
+	transition: all 0.3s ease;
+}
+
+/* Estilo para el cuadrado cuando el radio button está seleccionado */
+.options input[type="radio"]:checked+label::before {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+/* Estilo para el punto interior del cuadrado */
+.options label::after {
+	content: '';
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #fff;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+/* Mostrar el punto interior cuando el radio button está seleccionado */
+.options input[type="radio"]:checked+label::after {
+	opacity: 1;
+}
+
+
+.feedback {
+	margin-top: 20px;
+	padding: 15px;
+	border-radius: 8px;
+	text-align: left;
+}
+
+.feedback.correct {
+	background-color: #d4edda;
+	color: #155724;
+	border-color: #c3e6cb;
+}
+
+.feedback.incorrect {
+	background-color: #f8d7da;
+	color: #721c24;
+	border-color: #f5c6cb;
+}
+
+.feedback.warning {
+	background-color: #fff3cd;
+	color: #856404;
+	border-color: #ffeeba;
+}
+
+.explanation {
+	margin-top: 10px;
+	font-size: 0.95em;
+	color: #555;
+}
+
+.score-container {
+	margin-top: 20px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.score-button {
+	font-size: 1em;
+	font-weight: bold;
+	padding: 8px 15px;
+	border-radius: 8px;
+	border: none;
+	color: #ffffff;
+	display: inline-block;
+}
+
+.score-button.attempted {
+	background-color: #007bff;
+	/* Azul para Intentadas */
+}
+
+.score-button.correct {
+	background-color: #28a745;
+	/* Verde para Correctas */
+}
+
+.score-button.incorrect {
+	background-color: #ff9800;
+	/* Naranja para Incorrectas */
+}
+
+
+.button {
+	@apply text-white font-bold py-2 px-4 rounded-lg mt-4 transition duration-0;
+	/* Transición más rápida */
+	width: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #007bff;
+	color: #ffffff;
+	border: 2px solid #0056b3;
+	cursor: pointer;
+	text-decoration: none;
+	padding: 10px 20px;
+}
+
+.button:disabled {
+	@apply bg-gray-400 hover:bg-gray-400 cursor-not-allowed;
+	border-color: #6b7280;
+}
+
+.button:hover:not(:disabled) {
+	background-color: #0056b3;
+	border-color: #003f80;
+}
+
+/* Estilo para el mensaje final del quiz */
+.quiz-container h2 {
+	color: #007bff;
+}
+
+
+.timer {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #ff9800;
+	margin-bottom: 15px;
+	padding: 10px;
+	border: 2px solid #ff9800;
+	border-radius: 8px;
+	display: inline-block;
+}
+
+.end-message {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 1.1em;
+	color: #333;
+}
+
+.summary-section {
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+	text-align: left;
+}
+
+body.dark-mode .summary-section {
+	border-top-color: #4a5568;
+	/* Borde separador oscuro */
+}
+
+
+.summary-section h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #007bff;
+	text-align: center;
+}
+
+body.dark-mode .summary-section h3 {
+	color: #007bff;
+	/* Azul para título del resumen */
+}
+
+.summary-item {
+	margin-bottom: 20px;
+	padding: 15px;
+	background-color: #f9f9f9;
+	border-radius: 8px;
+	border: 1px solid #eee;
+}
+
+body.dark-mode .summary-item {
+	background-color: #2d3748;
+	border-color: #4a5568;
+}
+
+
+.summary-item strong {
+	color: #333;
+}
+
+body.dark-mode .summary-item strong {
+	color: #e2e8f0;
+	/* Texto de pregunta claro */
+}
+
+
+.summary-item .correct-answer {
+	margin-top: 5px;
+	font-weight: bold;
+	color: #155724;
+}
+
+body.dark-mode .summary-item .correct-answer {
+	color: #48bb78;
+	/* Verde en modo oscuro */
+}
+
+
+.summary-item .explanation {
+	margin-top: 5px;
+	font-size: 0.9em;
+	color: #555;
+}
+
+body.dark-mode .summary-item .explanation {
+	color: #cbd5e0;
+	/* Texto de explicación claro */
+}
+
+
+/* Estilos para el modo oscuro */
+body.dark-mode {
+	background-color: #1a202c;
+	/* Fondo oscuro */
+	color: #e2e8f0;
+	/* Texto claro */
+}
+
+body.dark-mode .quiz-container {
+	background-color: #2d3748;
+	/* Fondo oscuro para el contenedor */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .app-title {
+	/* Ajustar color del título principal en modo oscuro */
+	color: #e2e8f0;
+}
+
+body.dark-mode .app-subtitle {
+	color: #b0b0b0;
+}
+
+
+body.dark-mode .question {
+	color: #e2e8f0;
+	/* Texto de pregunta claro */
+}
+
+body.dark-mode .options label {
+	border-color: #4a5568;
+	/* Borde más oscuro */
+	color: #e2e8f0;
+	/* Texto de opción claro */
+}
+
+body.dark-mode .options label:hover {
+	background-color: #4a5568;
+	/* Fondo oscuro en hover */
+	border-color: #007bff;
+	/* Borde azul en hover */
+}
+
+body.dark-mode .options label::before {
+	border-color: #007bff;
+	/* Borde azul */
+	background-color: #2d3748;
+	/* Fondo oscuro */
+}
+
+body.dark-mode .options input[type="radio"]:checked+label::before {
+	background-color: #007bff;
+	/* Fondo azul seleccionado */
+	border-color: #007bff;
+}
+
+body.dark-mode .options label::after {
+	background-color: #e2e8f0;
+	/* Punto interior claro */
+}
+
+body.dark-mode .feedback.correct {
+	background-color: #48bb78;
+	/* Verde más oscuro */
+	color: #1a202c;
+	/* Texto oscuro */
+	border-color: #38a169;
+}
+
+body.dark-mode .feedback.incorrect {
+	background-color: #f56565;
+	/* Rojo más oscuro */
+	color: #1a202c;
+	/* Texto oscuro */
+	border-color: #e53e3e;
+}
+
+body.dark-mode .feedback.warning {
+	background-color: #f6e05e;
+	/* Amarillo más oscuro */
+	color: #2d3748;
+	/* Texto oscuro */
+	border-color: #d69e2e;
+}
+
+body.dark-mode .explanation {
+	color: #cbd5e0;
+	/* Texto de explicación claro */
+}
+
+body.dark-mode .quiz-container h2 {
+	color: #007bff;
+	/* Azul para título final */
+}
+
+body.dark-mode .quiz-container .score-button.attempted {
+	background-color: #007bff;
+	/* Azul para Intentadas */
+}
+
+body.dark-mode .quiz-container .score-button.correct {
+	background-color: #48bb78;
+	/* Verde en modo oscuro */
+}
+
+body.dark-mode .quiz-container .score-button.incorrect {
+	background-color: #ff9800;
+	/* Naranja en modo oscuro */
+}
+
+body.dark-mode .timer {
+	color: #ff9800;
+	/* Naranja para el temporizador */
+	border-color: #ff9800;
+}
+
+body.dark-mode .end-message {
+	color: #e2e8f0;
+	/* Texto claro */
+}
+
+body.dark-mode .summary-section {
+	border-top-color: #4a5568;
+	/* Borde separador oscuro */
+}
+
+body.dark-mode .summary-section h3 {
+	color: #007bff;
+	/* Azul para título del resumen */
+}
+
+body.dark-mode .summary-item {
+	background-color: #2d3748;
+	border-color: #4a5568;
+}
+
+body.dark-mode .summary-item strong {
+	color: #e2e8f0;
+	/* Texto de pregunta claro */
+}
+
+body.dark-mode .summary-item .correct-answer {
+	color: #48bb78;
+	/* Verde en modo oscuro */
+}
+
+body.dark-mode .summary-item .explanation {
+	color: #cbd5e0;
+	/* Texto de explicación claro */
+}
+
+/* Estilo para el botón de modo oscuro */
+#dark-mode-toggle {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background-color: #007bff;
+	/* Fondo azul */
+	color: white;
+	border: none;
+	border-radius: 50%;
+	/* Botón redondo */
+	width: 35px;
+	height: 35px;
+	font-size: 1em;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	z-index: 10;
+	/* Asegurar que esté por encima de otros elementos */
+}
+
+#dark-mode-toggle:hover {
+	background-color: #0056b3;
+	/* Azul más oscuro en hover */
+	transform: scale(1.05);
+}
+
+body.dark-mode #dark-mode-toggle {
+	background-color: #007bff;
+	/* Mantener azul en modo oscuro */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode #dark-mode-toggle:hover {
+	background-color: #0056b3;
+	/* Mantener azul más oscuro en hover */
+}
+
+/* Estilos para las pestañas */
+.tabs {
+	display: flex;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+	/* Ajustes para responsividad */
+	flex-wrap: wrap;
+	/* Permite que los botones se envuelvan */
+	justify-content: center;
+	/* Centra los botones cuando se envuelven */
+	gap: 5px;
+	/* Espacio entre botones */
+}
+
+body.dark-mode .tabs {
+	border-bottom-color: #4a5568;
+}
+
+.tab-button {
+	padding: 10px 15px;
+	/* Reducir padding para pantallas pequeñas */
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+	font-size: 1em;
+	/* Reducir tamaño de fuente */
+	font-weight: bold;
+	color: #555;
+	border-bottom: 2px solid transparent;
+	transition: color 0.3s ease, border-bottom-color 0.3s ease;
+	flex-grow: 1;
+	/* Permite que los botones crezcan para llenar espacio */
+	text-align: center;
+	/* Asegurar que el texto esté centrado */
+	min-width: 0;
+	/* Permite que los botones se encojan */
+}
+
+@media (min-width: 640px) {
+
+	/* A partir de un tamaño de pantalla 'sm' de Tailwind */
+	.tab-button {
+		padding: 10px 20px;
+		/* Volver al padding original en pantallas más grandes */
+		font-size: 1.1em;
+		/* Volver al tamaño de fuente original */
+		flex-grow: 0;
+		/* Desactivar crecimiento en pantallas más grandes */
+	}
+
+	.tabs {
+		flex-wrap: nowrap;
+		/* Evitar que los botones se envuelvan en pantallas más grandes */
+		justify-content: flex-start;
+		/* Alinear a la izquierda en pantallas más grandes */
+		gap: 0;
+		/* Eliminar gap si no se envuelven */
+	}
+}
+
+
+body.dark-mode .tab-button {
+	color: #b0b0b0;
+}
+
+.tab-button:hover {
+	color: #007bff;
+	border-bottom-color: #007bff;
+}
+
+body.dark-mode .tab-button:hover {
+	color: #007bff;
+	border-bottom-color: #007bff;
+}
+
+
+.tab-button.active {
+	color: #007bff;
+	border-bottom-color: #007bff;
+}
+
+body.dark-mode .tab-button.active {
+	color: #007bff;
+	border-bottom-color: #007bff;
+}
+
+
+.tab-content {
+	display: none;
+	/* Ocultar contenido de pestaña por defecto */
+	padding-top: 20px;
+}
+
+.tab-content.active {
+	display: block;
+	/* Mostrar contenido de la pestaña activa */
+}
+
+
+/* Mensaje de usabilidad para el progreso */
+.usability-message {
+	font-size: 0.85em;
+	color: #555;
+	margin-top: 20px;
+	text-align: center;
+}
+
+body.dark-mode .usability-message {
+	color: #b0b0b0;
+	/* Gris claro */
+}
+
+/* Contenedor para el historial de sesiones */
+.session-history-container {
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+	text-align: left;
+}
+
+body.dark-mode .session-history-container {
+	border-top-color: #424242;
+}
+
+.session-history-container h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #007bff;
+	text-align: center;
+}
+
+body.dark-mode .session-history-container h3 {
+	color: #007bff;
+	/* Azul */
+}
+
+.session-item {
+	margin-bottom: 15px;
+	padding: 15px;
+	background-color: #f9f9f9;
+	border-radius: 8px;
+	border: 1px solid #eee;
+}
+
+body.dark-mode .session-item {
+	background-color: #2d2d2d;
+	border-color: #424242;
+}
+
+.session-item p {
+	margin-bottom: 5px;
+	color: #333;
+}
+
+body.dark-mode .session-item p {
+	color: #e0e0e0;
+	/* Texto claro */
+}
+
+.session-item .score-detail {
+	font-size: 0.95em;
+	color: #555;
+}
+
+body.dark-mode .session-item .score-detail {
+	color: #b0b0b0;
+	/* Gris claro */
+}
+
+/* Estilos para el área del gráfico */
+.progress-chart-container {
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+	text-align: center;
+}
+
+body.dark-mode .progress-chart-container {
+	border-top-color: #424242;
+}
+
+.progress-chart-container h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #007bff;
+}
+
+body.dark-mode .progress-chart-container h3 {
+	color: #007bff;
+	/* Azul */
+}
+
+.progress-chart-container svg {
+	background-color: #f9f9f9;
+	/* Fondo claro para el gráfico */
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .progress-chart-container svg {
+	background-color: #2d2d2d;
+	/* Fondo oscuro para el gráfico */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.progress-chart-container .axis text {
+	font-size: 0.8em;
+	fill: #333;
+	/* Color de texto del eje */
+}
+
+body.dark-mode .progress-chart-container .axis text {
+	fill: #e0e0e0;
+	/* Color de texto del eje en modo oscuro */
+}
+
+.progress-chart-container .axis path,
+.progress-chart-container .axis line {
+	stroke: #888;
+	/* Color de las líneas del eje */
+}
+
+body.dark-mode .progress-chart-container .axis path,
+body.dark-mode .progress-chart-container .axis line {
+	stroke: #b0b0b0;
+	/* Color de las líneas del eje en modo oscuro */
+}
+
+.progress-chart-container .line-correct {
+	fill: none;
+	stroke: #4caf50;
+	/* Verde para línea correcta */
+	stroke-width: 2;
+}
+
+.progress-chart-container .line-incorrect {
+	fill: none;
+	stroke: #ff9800;
+	/* Naranja para línea incorrecta */
+	stroke-width: 2;
+}
+
+.progress-chart-container .dot {
+	fill: white;
+	/* Fondo blanco para los puntos */
+	stroke: #333;
+	/* Borde oscuro para los puntos */
+}
+
+body.dark-mode .progress-chart-container .dot {
+	fill: #1a202c;
+	/* Fondo oscuro para los puntos */
+	stroke: #e2e8f0;
+	/* Borde claro para los puntos */
+}
+
+
+/* Eliminar estilos de tooltip si no se usa */
+/*
+  .progress-chart-container .tooltip {
+      position: absolute;
+      text-align: center;
+      padding: 8px;
+      font: 12px sans-serif;
+      background: lightsteelblue;
+      border: 0px;
+      border-radius: 8px;
+      pointer-events: none;
+      color: #333;
+      z-index: 100;
+  }
+  */
+
+/* Estilos para la sección de configuración */
+.config-section {
+	margin-top: 20px;
+	text-align: left;
+	padding: 20px;
+	border: 1px solid #eee;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+}
+
+body.dark-mode .config-section {
+	border-color: #4a5568;
+	background-color: #2d3748;
+}
+
+.config-section h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #007bff;
+	text-align: center;
+}
+
+body.dark-mode .config-section h3 {
+	color: #007bff;
+}
+
+.config-item {
+	margin-bottom: 15px;
+}
+
+.config-item label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+	color: #333;
+}
+
+body.dark-mode .config-item label {
+	color: #e2e8f0;
+}
+
+.config-item input[type="number"] {
+	width: 80px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #fff;
+	color: #333;
+}
+
+body.dark-mode .config-item input[type="number"] {
+	border-color: #4a5568;
+	background-color: #1a202c;
+	color: #e2e8f0;
+}
+
+.start-button {
+	/* Reutilizar estilos del botón general pero con posibles ajustes */
+	@apply bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mt-4 transition duration-0;
+	background-color: #28a745;
+	/* Verde */
+	border-color: #218838;
+	/* Verde más oscuro */
+}
+
+body.dark-mode .start-button {
+	background-color: #48bb78;
+	/* Verde en modo oscuro */
+	border-color: #38a169;
+}
+
+body.dark-mode .start-button:hover {
+	background-color: #38a169;
+	border-color: #2b7d4b;
+}

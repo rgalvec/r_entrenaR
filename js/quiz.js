@@ -248,12 +248,12 @@ function checkAnswer() {
 
 	// Ocultar el botón de responder y mostrar el de siguiente
 	submitButton.classList.add('hidden');
-	// Solo mostrar el botón siguiente si el tiempo no se ha agotado
-	if (timeLeft > 0) {
+	// Solo mostrar el botón siguiente si el tiempo no se ha agotó o si ya se respondieron todas las preguntas configuradas
+	if (timeLeft > 0 && attemptedQuestionsCount < numberOfQuestions && currentQuestionIndex < shuffledQuizData.length - 1) {
 		nextButton.classList.remove('hidden');
 	} else {
-		// Si el tiempo se agotó, ir directamente a la pantalla final
-		endQuiz(true);
+		// Si el tiempo se agotó o ya se respondieron todas las preguntas configuradas, finalizar el quiz
+		endQuiz(timeLeft <= 0);
 	}
 
 
@@ -776,6 +776,7 @@ function restartQuiz() {
 		totalQuizTime = savedConfig.totalQuizTime;
 	} else {
 		// Si no hay configuración guardada, usar los valores por defecto de los inputs
+		// Esto es importante para el primer reinicio si nunca se usó "Iniciar Entrenamiento"
 		numberOfQuestions = parseInt(numQuestionsInput.value, 10);
 		totalQuizTime = parseInt(quizTimeInput.value, 10);
 	}

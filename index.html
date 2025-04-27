@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Entrena R</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+	<div class="quiz-container">
+		<button id="dark-mode-toggle">🌙</button>
+		<h1 class="app-title">Entrena R</h1>
+		<p class="app-subtitle">Configura tu entrenamiento y revisa tu progreso.</p>
+
+		<div class="tabs">
+			<button class="tab-button active" data-tab="config-tab">Configuración</button>
+			<button class="tab-button" data-tab="quiz-tab">Entrenamiento</button>
+			<button class="tab-button" data-tab="progress-tab">Progreso</button>
+		</div>
+
+		<div id="config-tab" class="tab-content active">
+			<div class="config-section">
+				<h3>Configurar Entrenamiento</h3>
+				<div class="config-item">
+					<label for="num-questions">Número de Preguntas:</label>
+					<input type="number" id="num-questions" value="10" min="1" max="10">
+				</div>
+				<div class="config-item">
+					<label for="quiz-time">Tiempo (segundos):</label>
+					<input type="number" id="quiz-time" value="60" min="10" max="300">
+				</div>
+				<button id="start-quiz-button" class="button start-button">Iniciar Entrenamiento</button>
+			</div>
+		</div>
+
+		<div id="quiz-tab" class="tab-content">
+			<div class="timer" id="timer-area">Tiempo restante: 60s</div>
+
+			<div id="quiz-content">
+				<div id="question-area">
+					<div class="question" id="question-text"></div>
+					<div class="options" id="options-area">
+					</div>
+				</div>
+
+				<button id="submit-answer" class="button">Responder</button>
+				<button id="next-question" class="button hidden">Siguiente pregunta</button>
+
+				<div id="feedback-area" class="feedback hidden">
+				</div>
+			</div>
+
+			<div class="score-container" id="score-area">
+			</div>
+
+			<div id="end-screen" class="hidden">
+				<button id="restart-quiz" class="button hidden">Reiniciar prueba</button>
+			</div>
+		</div>
+
+		<div id="progress-tab" class="tab-content">
+			<div class="session-history-container">
+				<h3 id="session-history-title">Historial de Sesión</h3>
+				<div id="session-history-list">
+				</div>
+				<button id="clear-history-button" class="button">Borrar Historial</button>
+				<p class="usability-message">Tu progreso se guarda en tu navegador hasta que borres el historial o uses
+					otro dispositivo.</p>
+			</div>
+
+			<div class="progress-chart-container hidden">
+				<h3>Progreso de Intentos</h3>
+				<div id="progress-chart">
+				</div>
+			</div>
+			<button id="download-csv-button" class="button mt-4">Descargar Historial (CSV)</button>
+		</div>
+	</div>
+
+	<script type="module" src="js/questions.js"></script>
+	<script type="module" src="js/quiz.js"></script>
+
+</body>
+
+</html>

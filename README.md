@@ -75,4 +75,5 @@ La estructura es un array de objetos JavaScript, donde cada objeto representa un
 
 ## Créditos
 
-	Este repositorio fue creado por el equipo de la [Escuela de Datos](https://aulavirtual.escuelasol.cl/escuela-de-datos#scrollTop=0) de la [Fundación SOL](www.fundacionsol.cl)
+Este repositorio fue creado por el equipo de la [Escuela de Datos](https://aulavirtual.escuelasol.cl/escuela-de-datos#scrollTop=0) de la [Fundación SOL](www.fundacionsol.cl)
+Puedes utilizarlo para tu proyectos, pero ten presente comentar de donde provino el código original para seguir nutriendo este código.

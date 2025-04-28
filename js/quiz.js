@@ -13,6 +13,9 @@ let numberOfQuestions = 10; // Cantidad de preguntas a mostrar (configurable)
 let timeLeft = totalQuizTime; // Tiempo restante total del quiz
 let quizActive = false; // Bandera para saber si el quiz está activo (inicia inactivo)
 
+const SESSIONS_TO_SHOW_INITIALLY = 10; // Número de sesiones a mostrar inicialmente
+let showingAllSessions = false; // Bandera para saber si se están mostrando todas las sesiones
+
 // Referencias a elementos del DOM (se obtienen en window.onload)
 let questionTextElement;
 let optionsAreaElement;
@@ -20,13 +23,15 @@ let submitButton;
 let nextButton;
 let restartButton;
 let feedbackAreaElement;
-let scoreAttemptedButton; // Botón para Intentadas
-let scoreCorrectButton;   // Botón para Correctas
-let scoreIncorrectButton; // Botón para Incorrectas
+// Eliminamos las referencias a los botones de puntaje individuales aquí,
+// ya que el contenedor score-area se ocultará y se creará uno nuevo en la pantalla final.
+// let scoreAttemptedButton; // Botón para Intentadas
+// let scoreCorrectButton;   // Botón para Correctas
+// let scoreIncorrectButton; // Botón para Incorrectas
 let timerAreaElement;
 let quizContentElement;
 let endScreenElement;
-let scoreContainerElement; // Contenedor de los botones de puntaje
+let scoreContainerElement; // Contenedor de los botones de puntaje principal
 let darkModeToggle; // Botón de modo oscuro
 let sessionHistoryList; // Lista para el historial de sesiones
 let clearHistoryButton; // Botón para borrar historial
@@ -38,6 +43,7 @@ let downloadCsvButton; // Botón de descarga CSV
 let numQuestionsInput; // Input para número de preguntas
 let quizTimeInput; // Input para tiempo del quiz
 let startQuizButton; // Botón para iniciar quiz desde config
+let showMoreSessionsButton; // Nuevo botón para mostrar más sesiones
 
 
 // Función para mezclar un array (Algoritmo Fisher-Yates (Knuth) Shuffle)
@@ -101,12 +107,11 @@ function loadQuestion() {
 	quizContentElement.classList.remove('hidden');
 	endScreenElement.classList.add('hidden');
 	timerAreaElement.classList.remove('hidden'); // Asegurarse de que el temporizador sea visible
-	scoreContainerElement.classList.remove('hidden'); // Asegurarse de que el contenedor de puntaje sea visible
+	scoreContainerElement.classList.remove('hidden'); // Asegurarse de que el contenedor de puntaje principal sea visible
 	progressChartContainer.classList.add('hidden'); // Ocultar el gráfico de progreso
 
 
 	// Deseleccionar cualquier radio button previamente seleccionado
-	// Esta parte es crucial para el bug de reinicio. Asegurarse de que la selección se limpia.
 	const selectedRadio = optionsAreaElement.querySelector('input[name="answer"]:checked');
 	if (selectedRadio) {
 		selectedRadio.checked = false;
@@ -167,7 +172,7 @@ function loadQuestion() {
 	// Habilitar el botón de responder
 	submitButton.disabled = false;
 
-	// Actualizar el puntaje mostrado (Intentadas, Correctas, Incorrectas)
+	// Actualizar el puntaje mostrado (Intentadas, Correctas, Incorrectas) en el contenedor principal
 	updateScoreDisplay();
 
 	// Deshabilitar opciones si el tiempo se agotó (aunque endQuiz debería manejar esto)
@@ -234,7 +239,9 @@ function checkAnswer() {
 		feedbackAreaElement.innerHTML = '<strong>¡Correcto!</strong>';
 	} else {
 		feedbackAreaElement.classList.add('incorrect');
-		feedbackAreaElement.innerHTML = `<strong>Incorrecto.</strong> La respuesta correcta es ${correctAnswer}.`;
+		// Modificado: Mostrar la respuesta correcta sin la letra indicadora
+		const correctAnswerText = shuffledQuizData[currentQuestionIndex].options[correctAnswer];
+		feedbackAreaElement.innerHTML = `<strong>Incorrecto.</strong> La respuesta correcta es: ${correctAnswerText}.`;
 	}
 
 	// Añadir la explicación al feedback
@@ -275,16 +282,35 @@ function nextQuestion() {
 	}
 }
 
-// Función para actualizar la visualización del puntaje
+// Función para actualizar la visualización del puntaje en el contenedor principal
 function updateScoreDisplay() {
 	const correct = score;
 	const incorrect = attemptedQuestionsCount - correct; // Usar el contador de intentadas
 
-	// Actualizar el texto de los botones de puntaje
-	scoreAttemptedButton.textContent = `Intentadas: ${attemptedQuestionsCount}`;
-	scoreCorrectButton.textContent = `Correctas: ${correct}`;
-	scoreIncorrectButton.textContent = `Incorrectas: ${incorrect}`;
+	// Asegurarse de que los elementos existan antes de intentar actualizar su contenido
+	// Esto es crucial si updateScoreDisplay se llama antes de que window.onload complete
+	if (scoreContainerElement) {
+		// Limpiar el contenido actual para evitar duplicados si se llama varias veces
+		scoreContainerElement.innerHTML = '';
+
+		// Crear y añadir los botones de puntaje si no existen
+		const attemptedButton = document.createElement('span');
+		attemptedButton.classList.add('score-button', 'attempted');
+		attemptedButton.textContent = `Intentadas: ${attemptedQuestionsCount}`;
+		scoreContainerElement.appendChild(attemptedButton);
+
+		const correctButton = document.createElement('span');
+		correctButton.classList.add('score-button', 'correct');
+		correctButton.textContent = `Correctas: ${correct}`;
+		scoreContainerElement.appendChild(correctButton);
+
+		const incorrectButton = document.createElement('span');
+		incorrectButton.classList.add('score-button', 'incorrect');
+		incorrectButton.textContent = `Incorrectas: ${incorrect}`;
+		scoreContainerElement.appendChild(incorrectButton);
+	}
 }
+
 
 // Función para finalizar el quiz
 function endQuiz(timeRanOut) {
@@ -295,9 +321,11 @@ function endQuiz(timeRanOut) {
 	stopTimer();
 	timerAreaElement.classList.add('hidden'); // Ocultar el temporizador al finalizar
 
+	// **Corrección:** Ocultar explícitamente el contenedor principal de puntaje
+	scoreContainerElement.classList.add('hidden');
+
 	// Ocultar el contenido del quiz
 	quizContentElement.classList.add('hidden');
-	scoreContainerElement.classList.add('hidden'); // Ocultar los botones de puntaje principales
 
 
 	// Mostrar la pantalla final
@@ -348,13 +376,13 @@ function endQuiz(timeRanOut) {
 	finalCorrectButton.textContent = `Correctas: ${finalCorrect}`;
 	finalScoreContainer.appendChild(finalCorrectButton);
 
-	const finalIncorrectButton = document.createElement('span');
-	finalIncorrectButton.classList.add('score-button', 'incorrect');
+	const finalIncorrectButton = document.classList.add('score-button', 'incorrect');
 	finalIncorrectButton.textContent = `Incorrectas: ${finalIncorrect}`;
 	finalScoreContainer.appendChild(finalIncorrectButton);
 
 
 	// Limpiar el contenido anterior de la pantalla final y añadir los nuevos elementos
+	// **Corrección:** Asegurarse de limpiar completamente la pantalla final antes de añadir nuevos elementos
 	endScreenElement.innerHTML = '';
 	endScreenElement.appendChild(endTitle);
 	endScreenElement.appendChild(finalScoreContainer); // Añadir el contenedor de botones de puntaje finales
@@ -380,16 +408,17 @@ function endQuiz(timeRanOut) {
 		questionText.innerHTML = `<strong>Pregunta ${i + 1}:</strong> ${questionData.question}`; // Usar i+1 para el número de pregunta en el resumen
 		summaryItem.appendChild(questionText);
 
-		const correctAnswer = document.createElement('p');
+		const correctAnswerElement = document.createElement('p');
 		// Encontrar el texto de la respuesta correcta usando la clave
 		const correctAnswerText = questionData.options[questionData.correctAnswer];
-		correctAnswer.innerHTML = `<span class="correct-answer">Respuesta Correcta: ${questionData.correctAnswer}) ${correctAnswerText}</span>`;
-		summaryItem.appendChild(correctAnswer);
+		// **Corrección:** Mostrar solo el texto de la respuesta correcta sin la letra indicadora
+		correctAnswerElement.innerHTML = `<span class="correct-answer">Respuesta Correcta: ${correctAnswerText}</span>`;
+		summaryItem.appendChild(correctAnswerElement);
 
-		const explanation = document.createElement('p');
-		explanation.classList.add('explanation');
-		explanation.textContent = `Explicación: ${questionData.explanation}`;
-		summaryItem.appendChild(explanation);
+		const explanationElement = document.createElement('p');
+		explanationElement.classList.add('explanation');
+		explanationElement.textContent = `Explicación: ${questionData.explanation}`;
+		summaryItem.appendChild(explanationElement);
 
 		summarySection.appendChild(summaryItem);
 	}
@@ -402,9 +431,6 @@ function endQuiz(timeRanOut) {
 	// Mostrar el botón de reiniciar
 	restartButton.classList.remove('hidden');
 	endScreenElement.appendChild(restartButton); // Añadir el botón de reiniciar a la pantalla final
-
-	// Asegurarse de que el área de puntaje principal esté oculta al mostrar el puntaje final en la pantalla final
-	// scoreAreaElement.classList.add('hidden'); // Esto ya no es necesario ya que ocultamos scoreContainerElement
 
 	// Guardar el resultado de la sesión en localStorage
 	saveSessionResult({
@@ -422,18 +448,6 @@ function endQuiz(timeRanOut) {
 		timestamp: new Date().toISOString(),
 		quizId: 'r_markdown_shiny_quiz' // Identificador del quiz
 	});
-
-	// Mostrar el gráfico de progreso al finalizar el quiz
-	// progressChartContainer.classList.remove('hidden'); // Ya no se muestra aquí, se muestra en la pestaña Progreso
-	// drawProgressChart(); // Ya no se dibuja aquí
-}
-
-// Función para guardar el resultado de la sesión en localStorage
-function saveSessionResult(result) {
-	const results = JSON.parse(localStorage.getItem('quizResults') || '[]');
-	results.push(result);
-	localStorage.setItem('quizResults', JSON.stringify(results));
-	displaySessionHistory(); // Actualizar la visualización del historial
 }
 
 // Función para cargar y mostrar el historial de sesiones
@@ -445,19 +459,43 @@ function displaySessionHistory() {
 		sessionHistoryList.innerHTML = '<p class="text-center text-gray-500">Aún no hay intentos en esta sesión.</p>';
 		// Ocultar el gráfico si no hay historial
 		progressChartContainer.classList.add('hidden');
+		// Ocultar el botón "Mostrar Más" si no hay historial
+		if (showMoreSessionsButton) {
+			showMoreSessionsButton.classList.add('hidden');
+		}
 		return;
 	}
 
-	results.forEach((result, index) => {
+	// Determinar cuántas sesiones mostrar
+	const sessionsToShow = showingAllSessions ? results.length : Math.min(results.length, SESSIONS_TO_SHOW_INITIALLY);
+
+	// Mostrar las sesiones
+	for (let i = 0; i < sessionsToShow; i++) {
+		const result = results[i];
 		const sessionItem = document.createElement('div');
 		sessionItem.classList.add('session-item');
 		sessionItem.innerHTML = `
-                 <p><strong>Intento ${index + 1}:</strong></p>
+                 <p><strong>Intento ${i + 1}:</strong></p>
                  <p class="score-detail">Intentadas: ${result.attempted}, Correctas: ${result.correct}, Incorrectas: ${result.incorrect}</p>
                  ${result.timestamp ? `<p class="score-detail">Hora: ${new Date(result.timestamp).toLocaleString()}</p>` : ''}
              `;
 		sessionHistoryList.appendChild(sessionItem);
-	});
+	}
+
+	// Mostrar u ocultar el botón "Mostrar Más"
+	if (results.length > SESSIONS_TO_SHOW_INITIALLY && !showingAllSessions) {
+		if (showMoreSessionsButton) {
+			showMoreSessionsButton.textContent = `Mostrar más (${results.length - SESSIONS_TO_SHOW_INITIALLY} intentos más)`;
+			showMoreSessionsButton.classList.remove('hidden');
+			// Asegurarse de que el botón esté después de la lista
+			sessionHistoryList.parentNode.insertBefore(showMoreSessionsButton, sessionHistoryList.nextSibling);
+		}
+	} else {
+		if (showMoreSessionsButton) {
+			showMoreSessionsButton.classList.add('hidden');
+		}
+	}
+
 
 	// Mostrar el gráfico si hay historial
 	progressChartContainer.classList.remove('hidden');
@@ -467,6 +505,7 @@ function displaySessionHistory() {
 // Función para borrar el historial de sesiones
 function clearSessionHistory() {
 	localStorage.removeItem('quizResults');
+	showingAllSessions = false; // Reiniciar la bandera al borrar historial
 	displaySessionHistory(); // Actualizar la visualización (mostrará el mensaje de "Aún no hay intentos")
 }
 
@@ -705,8 +744,10 @@ function changeTab(tabId) {
 	// Activar el botón de la pestaña seleccionada
 	document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
 
-	// Si la pestaña de progreso está activa, dibujar el gráfico
+	// Si la pestaña de progreso está activa, dibujar el gráfico y mostrar historial limitado
 	if (tabId === 'progress-tab') {
+		showingAllSessions = false; // Al cambiar a la pestaña, mostrar solo las primeras 10
+		displaySessionHistory();
 		drawProgressChart();
 	}
 }
@@ -743,15 +784,14 @@ function startNewQuiz() {
 	// Mezclar las preguntas (solo el número configurado)
 	shuffledQuizData = shuffleArray([...originalQuizData]).slice(0, numberOfQuestions);
 
-	// Reiniciar la visualización del puntaje
-	scoreAttemptedButton.textContent = `Intentadas: 0`;
-	scoreCorrectButton.textContent = `Correctas: 0`;
-	scoreIncorrectButton.textContent = `Incorrectas: 0`;
+	// Reiniciar la visualización del puntaje en el contenedor principal
+	updateScoreDisplay();
+	scoreContainerElement.classList.remove('hidden'); // Asegurarse de que el contenedor principal sea visible al inicio
+
 
 	// Ocultar pantalla final y mostrar contenido del quiz
 	endScreenElement.classList.add('hidden');
 	quizContentElement.classList.remove('hidden');
-	scoreContainerElement.classList.remove('hidden');
 	progressChartContainer.classList.add('hidden'); // Ocultar gráfico
 
 	// Iniciar temporizador y cargar primera pregunta
@@ -790,24 +830,19 @@ function restartQuiz() {
 	// Mezclar las preguntas nuevamente al reiniciar (usando el número configurado)
 	shuffledQuizData = shuffleArray([...originalQuizData]).slice(0, numberOfQuestions);
 
-	// Reiniciar la visualización del puntaje antes de cargar la primera pregunta
-	scoreAttemptedButton.textContent = `Intentadas: 0`;
-	scoreCorrectButton.textContent = `Correctas: 0`;
-	scoreIncorrectButton.textContent = `Incorrectas: 0`;
+	// Reiniciar la visualización del puntaje en el contenedor principal antes de cargar la primera pregunta
+	updateScoreDisplay();
+	scoreContainerElement.classList.remove('hidden'); // Asegurarse de que el contenedor principal sea visible al reiniciar
+
 
 	// Asegurarse de que el botón de responder esté visible y los de siguiente/reiniciar ocultos
 	submitButton.classList.remove('hidden');
 	nextButton.classList.add('hidden');
 	restartButton.classList.add('hidden'); // Asegurarse de que el botón de reiniciar esté oculto
 
-	// Habilitar las opciones de respuesta antes de cargar la pregunta
-	// enableOptions(); // Esta llamada se hace dentro de loadQuestion() ahora
-
-
 	// Ocultar pantalla final y mostrar contenido del quiz
 	endScreenElement.classList.add('hidden');
 	quizContentElement.classList.remove('hidden');
-	scoreContainerElement.classList.remove('hidden');
 	progressChartContainer.classList.add('hidden'); // Ocultar el gráfico al reiniciar
 
 	// Iniciar temporizador y cargar primera pregunta
@@ -835,6 +870,12 @@ function toggleDarkMode() {
 	}
 }
 
+// Función para mostrar todas las sesiones del historial
+function showAllSessions() {
+	showingAllSessions = true;
+	displaySessionHistory(); // Volver a dibujar el historial, esta vez completo
+}
+
 
 // Este código se ejecutará una vez que toda la página HTML esté completamente cargada
 window.onload = () => {
@@ -845,7 +886,7 @@ window.onload = () => {
 	nextButton = document.getElementById('next-question');
 	restartButton = document.getElementById('restart-quiz'); // Obtener referencia al botón de reiniciar
 	feedbackAreaElement = document.getElementById('feedback-area');
-	scoreContainerElement = document.getElementById('score-area'); // Referencia al contenedor
+	scoreContainerElement = document.getElementById('score-area'); // Referencia al contenedor principal
 	timerAreaElement = document.getElementById('timer-area');
 	quizContentElement = document.getElementById('quiz-content');
 	endScreenElement = document.getElementById('end-screen');
@@ -861,6 +902,13 @@ window.onload = () => {
 	quizTimeInput = document.getElementById('quiz-time'); // Input para tiempo del quiz
 	startQuizButton = document.getElementById('start-quiz-button'); // Botón para iniciar quiz desde config
 
+	// Crear el botón "Mostrar Más" dinámicamente si no existe
+	showMoreSessionsButton = document.createElement('button');
+	showMoreSessionsButton.classList.add('button', 'show-more-button', 'hidden'); // Añadir clase y ocultar inicialmente
+	showMoreSessionsButton.textContent = 'Mostrar más';
+	// Añadir el botón al contenedor del historial (será posicionado correctamente en displaySessionHistory)
+	document.querySelector('.session-history-container').appendChild(showMoreSessionsButton);
+
 
 	// Establecer el valor máximo para el input de número de preguntas
 	numQuestionsInput.max = originalQuizData.length;
@@ -875,19 +923,10 @@ window.onload = () => {
 		quizTimeInput.value = totalQuizTime;
 	}
 
+	// Inicializar la visualización del puntaje principal al cargar la página
+	// Esto creará los spans dentro de score-area
+	updateScoreDisplay();
 
-	// Crear los elementos para los botones de puntaje
-	scoreAttemptedButton = document.createElement('span');
-	scoreAttemptedButton.classList.add('score-button', 'attempted');
-	scoreContainerElement.appendChild(scoreAttemptedButton);
-
-	scoreCorrectButton = document.createElement('span');
-	scoreCorrectButton.classList.add('score-button', 'correct');
-	scoreContainerElement.appendChild(scoreCorrectButton);
-
-	scoreIncorrectButton = document.createElement('span');
-	scoreIncorrectButton.classList.add('score-button', 'incorrect');
-	scoreContainerElement.appendChild(scoreIncorrectButton);
 
 	// --- Eliminar creación de Tooltip aquí ---
 	// El elemento tooltip y su lógica de mouseover/mouseout se eliminan de drawProgressChart.
@@ -901,6 +940,7 @@ window.onload = () => {
 	clearHistoryButton.addEventListener('click', clearSessionHistory); // Event listener para borrar historial
 	downloadCsvButton.addEventListener('click', downloadCSV); // Event listener para descargar CSV
 	startQuizButton.addEventListener('click', startNewQuiz); // Event listener para iniciar nuevo quiz desde config
+	showMoreSessionsButton.addEventListener('click', showAllSessions); // Event listener para el botón "Mostrar Más"
 
 
 	// Event listeners para los botones de pestaña
@@ -917,7 +957,7 @@ window.onload = () => {
 		document.body.classList.add('dark-mode');
 	}
 
-	// Cargar y mostrar el historial de sesiones al cargar la página
+	// Cargar y mostrar el historial de sesiones al cargar la página (limitado por defecto)
 	displaySessionHistory();
 
 	// Inicializar la interfaz mostrando la primera pestaña (Configuración)

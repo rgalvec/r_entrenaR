@@ -1,7 +1,9 @@
 /* Estilos base para el modo claro */
 body {
 	font-family: "Inter", sans-serif;
+	/* Usar la fuente Inter */
 	background-color: #f4f7f6;
+	/* Fondo claro */
 	color: #333;
 	/* Texto oscuro por defecto */
 	display: flex;
@@ -34,7 +36,8 @@ body {
 	font-weight: bold;
 	margin-bottom: 5px;
 	/* Espacio antes del subtítulo */
-	color: #333;
+	color: #ff6600;
+	/* Naranja del afiche */
 }
 
 .app-subtitle {
@@ -74,7 +77,7 @@ body {
 .options label:hover {
 	background-color: #ffeacc;
 	/* Naranja claro para hover */
-	border-color: #ff9800;
+	border-color: #ff6600;
 	/* Naranja para el borde en hover */
 }
 
@@ -96,7 +99,8 @@ body {
 	transform: translateY(-50%);
 	width: 20px;
 	height: 20px;
-	border: 2px solid #007bff;
+	border: 2px solid #ff6600;
+	/* Borde naranja */
 	border-radius: 4px;
 	background-color: #fff;
 	transition: all 0.3s ease;
@@ -104,8 +108,9 @@ body {
 
 /* Estilo para el cuadrado cuando el radio button está seleccionado */
 .options input[type="radio"]:checked+label::before {
-	background-color: #007bff;
-	border-color: #007bff;
+	background-color: #ff6600;
+	/* Fondo naranja */
+	border-color: #ff6600;
 }
 
 /* Estilo para el punto interior del cuadrado */
@@ -119,6 +124,7 @@ body {
 	height: 8px;
 	border-radius: 50%;
 	background-color: #fff;
+	/* Punto blanco */
 	opacity: 0;
 	transition: opacity 0.3s ease;
 }
@@ -180,18 +186,18 @@ body {
 }
 
 .score-button.attempted {
-	background-color: #007bff;
-	/* Azul para Intentadas */
+	background-color: #ff6600;
+	/* Naranja para Intentadas */
 }
 
 .score-button.correct {
 	background-color: #28a745;
-	/* Verde para Correctas */
+	/* Verde para Correctas (mantener para distinción) */
 }
 
 .score-button.incorrect {
-	background-color: #ff9800;
-	/* Naranja para Incorrectas */
+	background-color: #dc3545;
+	/* Rojo para Incorrectas (cambiar de naranja a rojo para distinción) */
 }
 
 
@@ -202,12 +208,16 @@ body {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: #007bff;
+	background-color: #ff6600;
+	/* Naranja */
 	color: #ffffff;
-	border: 2px solid #0056b3;
+	border: 2px solid #cc5200;
+	/* Naranja más oscuro */
 	cursor: pointer;
 	text-decoration: none;
 	padding: 10px 20px;
+	border-radius: 10px;
+	/* Añadido: Bordes más redondeados para los botones */
 }
 
 .button:disabled {
@@ -216,23 +226,28 @@ body {
 }
 
 .button:hover:not(:disabled) {
-	background-color: #0056b3;
-	border-color: #003f80;
+	background-color: #cc5200;
+	/* Naranja más oscuro en hover */
+	border-color: #993f00;
+	/* Naranja aún más oscuro */
 }
 
 /* Estilo para el mensaje final del quiz */
 .quiz-container h2 {
-	color: #007bff;
+	color: #ff6600;
+	/* Naranja */
 }
 
 
 .timer {
 	font-size: 1.5em;
 	font-weight: bold;
-	color: #ff9800;
+	color: #ff6600;
+	/* Naranja */
 	margin-bottom: 15px;
 	padding: 10px;
-	border: 2px solid #ff9800;
+	border: 2px solid #ff6600;
+	/* Borde naranja */
 	border-radius: 8px;
 	display: inline-block;
 }
@@ -261,13 +276,14 @@ body.dark-mode .summary-section {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin-bottom: 15px;
-	color: #007bff;
+	color: #ff6600;
+	/* Naranja */
 	text-align: center;
 }
 
 body.dark-mode .summary-section h3 {
-	color: #007bff;
-	/* Azul para título del resumen */
+	color: #ff6600;
+	/* Naranja para título del resumen */
 }
 
 .summary-item {
@@ -298,6 +314,7 @@ body.dark-mode .summary-item strong {
 	margin-top: 5px;
 	font-weight: bold;
 	color: #155724;
+	/* Verde */
 }
 
 body.dark-mode .summary-item .correct-answer {
@@ -334,7 +351,8 @@ body.dark-mode .quiz-container {
 
 body.dark-mode .app-title {
 	/* Ajustar color del título principal en modo oscuro */
-	color: #e2e8f0;
+	color: #ff6600;
+	/* Naranja */
 }
 
 body.dark-mode .app-subtitle {
@@ -357,21 +375,21 @@ body.dark-mode .options label {
 body.dark-mode .options label:hover {
 	background-color: #4a5568;
 	/* Fondo oscuro en hover */
-	border-color: #007bff;
-	/* Borde azul en hover */
+	border-color: #ff6600;
+	/* Borde naranja en hover */
 }
 
 body.dark-mode .options label::before {
-	border-color: #007bff;
-	/* Borde azul */
+	border-color: #ff6600;
+	/* Borde naranja */
 	background-color: #2d3748;
 	/* Fondo oscuro */
 }
 
 body.dark-mode .options input[type="radio"]:checked+label::before {
-	background-color: #007bff;
-	/* Fondo azul seleccionado */
-	border-color: #007bff;
+	background-color: #ff6600;
+	/* Fondo naranja seleccionado */
+	border-color: #ff6600;
 }
 
 body.dark-mode .options label::after {
@@ -409,13 +427,13 @@ body.dark-mode .explanation {
 }
 
 body.dark-mode .quiz-container h2 {
-	color: #007bff;
-	/* Azul para título final */
+	color: #ff6600;
+	/* Naranja para título final */
 }
 
 body.dark-mode .quiz-container .score-button.attempted {
-	background-color: #007bff;
-	/* Azul para Intentadas */
+	background-color: #ff6600;
+	/* Naranja para Intentadas */
 }
 
 body.dark-mode .quiz-container .score-button.correct {
@@ -424,14 +442,14 @@ body.dark-mode .quiz-container .score-button.correct {
 }
 
 body.dark-mode .quiz-container .score-button.incorrect {
-	background-color: #ff9800;
-	/* Naranja en modo oscuro */
+	background-color: #f56565;
+	/* Rojo en modo oscuro */
 }
 
 body.dark-mode .timer {
-	color: #ff9800;
+	color: #ff6600;
 	/* Naranja para el temporizador */
-	border-color: #ff9800;
+	border-color: #ff6600;
 }
 
 body.dark-mode .end-message {
@@ -445,8 +463,8 @@ body.dark-mode .summary-section {
 }
 
 body.dark-mode .summary-section h3 {
-	color: #007bff;
-	/* Azul para título del resumen */
+	color: #ff6600;
+	/* Naranja para título del resumen */
 }
 
 body.dark-mode .summary-item {
@@ -474,8 +492,8 @@ body.dark-mode .summary-item .explanation {
 	position: absolute;
 	top: 15px;
 	right: 15px;
-	background-color: #007bff;
-	/* Fondo azul */
+	background-color: #ff6600;
+	/* Fondo naranja */
 	color: white;
 	border: none;
 	border-radius: 50%;
@@ -494,20 +512,20 @@ body.dark-mode .summary-item .explanation {
 }
 
 #dark-mode-toggle:hover {
-	background-color: #0056b3;
-	/* Azul más oscuro en hover */
+	background-color: #cc5200;
+	/* Naranja más oscuro en hover */
 	transform: scale(1.05);
 }
 
 body.dark-mode #dark-mode-toggle {
-	background-color: #007bff;
-	/* Mantener azul en modo oscuro */
+	background-color: #ff6600;
+	/* Mantener naranja en modo oscuro */
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode #dark-mode-toggle:hover {
-	background-color: #0056b3;
-	/* Mantener azul más oscuro en hover */
+	background-color: #cc5200;
+	/* Mantener naranja más oscuro en hover */
 }
 
 /* Estilos para las pestañas */
@@ -576,24 +594,32 @@ body.dark-mode .tab-button {
 }
 
 .tab-button:hover {
-	color: #007bff;
-	border-bottom-color: #007bff;
+	color: #ff6600;
+	/* Naranja */
+	border-bottom-color: #ff6600;
+	/* Naranja */
 }
 
 body.dark-mode .tab-button:hover {
-	color: #007bff;
-	border-bottom-color: #007bff;
+	color: #ff6600;
+	/* Naranja */
+	border-bottom-color: #ff6600;
+	/* Naranja */
 }
 
 
 .tab-button.active {
-	color: #007bff;
-	border-bottom-color: #007bff;
+	color: #ff6600;
+	/* Naranja */
+	border-bottom-color: #ff6600;
+	/* Naranja */
 }
 
 body.dark-mode .tab-button.active {
-	color: #007bff;
-	border-bottom-color: #007bff;
+	color: #ff6600;
+	/* Naranja */
+	border-bottom-color: #ff6600;
+	/* Naranja */
 }
 
 
@@ -638,13 +664,14 @@ body.dark-mode .session-history-container {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin-bottom: 15px;
-	color: #007bff;
+	color: #ff6600;
+	/* Naranja */
 	text-align: center;
 }
 
 body.dark-mode .session-history-container h3 {
-	color: #007bff;
-	/* Azul */
+	color: #ff6600;
+	/* Naranja */
 }
 
 .session-item {
@@ -696,12 +723,13 @@ body.dark-mode .progress-chart-container {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin-bottom: 15px;
-	color: #007bff;
+	color: #ff6600;
+	/* Naranja */
 }
 
 body.dark-mode .progress-chart-container h3 {
-	color: #007bff;
-	/* Azul */
+	color: #ff6600;
+	/* Naranja */
 }
 
 .progress-chart-container svg {
@@ -749,7 +777,7 @@ body.dark-mode .progress-chart-container .axis line {
 
 .progress-chart-container .line-incorrect {
 	fill: none;
-	stroke: #ff9800;
+	stroke: #ff6600;
 	/* Naranja para línea incorrecta */
 	stroke-width: 2;
 }
@@ -768,22 +796,6 @@ body.dark-mode .progress-chart-container .dot {
 	/* Borde claro para los puntos */
 }
 
-
-/* Eliminar estilos de tooltip si no se usa */
-/*
-  .progress-chart-container .tooltip {
-      position: absolute;
-      text-align: center;
-      padding: 8px;
-      font: 12px sans-serif;
-      background: lightsteelblue;
-      border: 0px;
-      border-radius: 8px;
-      pointer-events: none;
-      color: #333;
-      z-index: 100;
-  }
-  */
 
 /* Estilos para la sección de configuración */
 .config-section {
@@ -804,12 +816,14 @@ body.dark-mode .config-section {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin-bottom: 15px;
-	color: #007bff;
+	color: #ff6600;
+	/* Naranja */
 	text-align: center;
 }
 
 body.dark-mode .config-section h3 {
-	color: #007bff;
+	color: #ff6600;
+	/* Naranja */
 }
 
 .config-item {
@@ -839,25 +853,78 @@ body.dark-mode .config-item label {
 body.dark-mode .config-item input[type="number"] {
 	border-color: #4a5568;
 	background-color: #1a202c;
-	color: #e2e8f0;
+	/* Fondo oscuro para el input */
+	color: #ffffff;
+	/* Color blanco para los números en modo oscuro */
 }
 
 .start-button {
 	/* Reutilizar estilos del botón general pero con posibles ajustes */
 	@apply bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mt-4 transition duration-0;
-	background-color: #28a745;
-	/* Verde */
-	border-color: #218838;
-	/* Verde más oscuro */
+	background-color: #ff6600;
+	/* Naranja */
+	border-color: #cc5200;
+	/* Naranja más oscuro */
 }
 
 body.dark-mode .start-button {
-	background-color: #48bb78;
-	/* Verde en modo oscuro */
-	border-color: #38a169;
+	background-color: #ff6600;
+	/* Naranja */
+	border-color: #cc5200;
 }
 
 body.dark-mode .start-button:hover {
-	background-color: #38a169;
-	border-color: #2b7d4b;
+	background-color: #cc5200;
+	border-color: #993f00;
+}
+
+/* Estilos para el pie de página (mención Escuela de Datos) */
+.footer {
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+	text-align: center;
+	font-size: 0.9em;
+	color: #555;
+}
+
+body.dark-mode .footer {
+	border-top-color: #4a5568;
+	color: #b0b0b0;
+}
+
+.footer .school-name {
+	font-weight: bold;
+	color: #ff6600;
+	/* Naranja */
+}
+
+body.dark-mode .footer .school-name {
+	color: #ff6600;
+	/* Naranja */
+}
+
+/* Nuevo estilo para el botón "Mostrar Más" */
+.show-more-button {
+	background-color: #007bff;
+	/* Azul, diferente del naranja principal para distinguirlo */
+	border-color: #0056b3;
+	margin-top: 10px;
+	/* Espacio encima del botón */
+	margin-bottom: 20px;
+	/* Espacio debajo del botón */
+	border-radius: 10px;
+	/* Añadido: Bordes más redondeados para el botón Mostrar Más */
+}
+
+body.dark-mode .show-more-button {
+	background-color: #007bff;
+	/* Azul en modo oscuro */
+	border-color: #0056b3;
+}
+
+.show-more-button:hover:not(:disabled) {
+	background-color: #0056b3;
+	/* Azul más oscuro en hover */
+	border-color: #003f80;
 }

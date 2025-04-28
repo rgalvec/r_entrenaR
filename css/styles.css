@@ -486,7 +486,7 @@ body.dark-mode .summary-item .explanation {
 	/* Texto de explicación claro */
 }
 
-/* Estilo para el botón de modo oscuro */
+/* Estilos para el botón de modo oscuro */
 #dark-mode-toggle {
 	position: absolute;
 	top: 15px;
@@ -541,6 +541,28 @@ body.dark-mode #dark-mode-toggle:hover {
 	/* Espacio entre botones */
 }
 
+@media (min-width: 640px) {
+
+	/* A partir de un tamaño de pantalla 'sm' de Tailwind */
+	.tab-button {
+		padding: 10px 20px;
+		/* Volver al padding original en pantallas más grandes */
+		font-size: 1.1em;
+		/* Volver al tamaño de fuente original */
+		flex-grow: 0;
+		/* Desactivar crecimiento en pantallas más grandes */
+	}
+
+	.tabs {
+		flex-wrap: nowrap;
+		/* Evitar que los botones se envuelvan en pantallas más grandes */
+		justify-content: flex-start;
+		/* Alinear a la izquierda en pantallas más grandes */
+		gap: 0;
+		/* Eliminar gap si no se envuelven */
+	}
+}
+
 body.dark-mode .tabs {
 	border-bottom-color: #4a5568;
 }
@@ -564,29 +586,6 @@ body.dark-mode .tabs {
 	min-width: 0;
 	/* Permite que los botones se encojen */
 }
-
-@media (min-width: 640px) {
-
-	/* A partir de un tamaño de pantalla 'sm' de Tailwind */
-	.tab-button {
-		padding: 10px 20px;
-		/* Volver al padding original en pantallas más grandes */
-		font-size: 1.1em;
-		/* Volver al tamaño de fuente original */
-		flex-grow: 0;
-		/* Desactivar crecimiento en pantallas más grandes */
-	}
-
-	.tabs {
-		flex-wrap: nowrap;
-		/* Evitar que los botones se envuelvan en pantallas más grandes */
-		justify-content: flex-start;
-		/* Alinear a la izquierda en pantallas más grandes */
-		gap: 0;
-		/* Eliminar gap si no se envuelven */
-	}
-}
-
 
 body.dark-mode .tab-button {
 	color: #b0b0b0;
@@ -937,4 +936,66 @@ body.dark-mode .show-more-button {
 	background-color: #0056b3;
 	/* Azul más oscuro en hover */
 	border-color: #003f80;
+}
+
+/* Estilos para el mensaje personalizado */
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	/* Fondo semitransparente oscuro */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	/* Asegura que esté por encima de otros elementos */
+}
+
+.message-box {
+	background-color: #ffffff;
+	/* Fondo blanco */
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	max-width: 400px;
+	width: 90%;
+}
+
+body.dark-mode .message-box {
+	background-color: #2d3748;
+	/* Fondo oscuro en modo oscuro */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.message-box h4 {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: #ff6600;
+	/* Naranja para el título del mensaje */
+}
+
+.message-box p {
+	margin-bottom: 20px;
+	color: #333;
+	/* Texto oscuro */
+}
+
+body.dark-mode .message-box p {
+	color: #e2e8f0;
+	/* Texto claro en modo oscuro */
+}
+
+.message-box .button {
+	/* Reutiliza los estilos del botón general */
+	margin-top: 0;
+	/* Elimina el margen superior extra */
+}
+
+.hidden {
+	display: none;
 }

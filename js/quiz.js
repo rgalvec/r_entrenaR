@@ -45,6 +45,32 @@ let quizTimeInput; // Input para tiempo del quiz
 let startQuizButton; // Botón para iniciar quiz desde config
 let showMoreSessionsButton; // Nuevo botón para mostrar más sesiones
 
+// Referencias a elementos del mensaje personalizado
+let customMessageOverlay;
+let messageTitleElement;
+let messageTextElement;
+let messageOkButton;
+
+
+// Función para mostrar el mensaje personalizado
+function showCustomMessage(title, message) {
+	if (customMessageOverlay && messageTitleElement && messageTextElement && messageOkButton) {
+		messageTitleElement.textContent = title;
+		messageTextElement.textContent = message;
+		customMessageOverlay.classList.remove('hidden');
+	} else {
+		// Fallback a alert si los elementos no están disponibles (no debería pasar después de window.onload)
+		alert(`${title}\n\n${message}`);
+	}
+}
+
+// Función para ocultar el mensaje personalizado
+function hideCustomMessage() {
+	if (customMessageOverlay) {
+		customMessageOverlay.classList.add('hidden');
+	}
+}
+
 
 // Función para mezclar un array (Algoritmo Fisher-Yates (Knuth) Shuffle)
 function shuffleArray(array) {
@@ -525,7 +551,7 @@ function downloadCSV() {
 	const results = JSON.parse(localStorage.getItem('quizResults') || '[]');
 
 	if (results.length === 0) {
-		alert("No hay historial para descargar.");
+		showCustomMessage("Atención!", "No hay historial para descargar.");
 		return;
 	}
 
@@ -560,7 +586,7 @@ function downloadCSV() {
 		document.body.removeChild(link);
 	} else {
 		// Fallback para navegadores que no soportan el atributo download
-		alert("Tu navegador no soporta la descarga automática. Copia el siguiente texto:\n\n" + csvContent);
+		showCustomMessage("Atención!", "Tu navegador no soporta la descarga automática. Copia el siguiente texto:\n\n" + csvContent);
 	}
 }
 
@@ -762,11 +788,11 @@ function startNewQuiz() {
 
 	// Validar los valores de configuración
 	if (isNaN(requestedQuestions) || requestedQuestions < 1 || requestedQuestions > originalQuizData.length) {
-		alert(`Por favor, ingresa un número de preguntas válido entre 1 y ${originalQuizData.length}.`);
+		showCustomMessage("Atención!", `Por favor, ingresa un número de preguntas válido entre 1 y ${originalQuizData.length}.`);
 		return;
 	}
 	if (isNaN(requestedTime) || requestedTime < 10 || requestedTime > 300) { // Mínimo 10s, Máximo 300s (5 minutos)
-		alert("Por favor, ingresa un tiempo válido entre 10 y 300 segundos (5 minutos).");
+		showCustomMessage("Atención!", "Por favor, ingresa un tiempo válido entre 10 y 300 segundos (5 minutos).");
 		return;
 	}
 
@@ -911,6 +937,12 @@ window.onload = () => {
 	// Añadir el botón al contenedor del historial (será posicionado correctamente en displaySessionHistory)
 	document.querySelector('.session-history-container').appendChild(showMoreSessionsButton);
 
+	// Obtener referencias a los elementos del mensaje personalizado
+	customMessageOverlay = document.getElementById('custom-message-overlay');
+	messageTitleElement = document.getElementById('message-title');
+	messageTextElement = document.getElementById('message-text');
+	messageOkButton = document.getElementById('message-ok-button');
+
 
 	// Establecer el valor máximo para el input de número de preguntas
 	numQuestionsInput.max = originalQuizData.length;
@@ -943,6 +975,7 @@ window.onload = () => {
 	downloadCsvButton.addEventListener('click', downloadCSV); // Event listener para descargar CSV
 	startQuizButton.addEventListener('click', startNewQuiz); // Event listener para iniciar nuevo quiz desde config
 	showMoreSessionsButton.addEventListener('click', showAllSessions); // Event listener para el botón "Mostrar Más"
+	messageOkButton.addEventListener('click', hideCustomMessage); // Event listener para el botón OK del mensaje personalizado
 
 
 	// Event listeners para los botones de pestaña

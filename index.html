@@ -18,8 +18,8 @@
 
 		<h1 class="app-title">Entrena R</h1>
 		<p class="app-subtitle">Configura tu entrenamiento y revisa tu progreso.</p>
-		<p class="app-subtitle">Este es un set de 60 preguntas desde lo más sencillo a lo más complejo para trabajar con
-			datos usando R.</p>
+		<p class="app-subtitle">Este es un set de 49 preguntas, desde lo más sencillo a lo más complejo para trabajar
+			con datos usando R.</p>
 
 		<div class="tabs">
 			<button class="tab-button active" data-tab="config-tab">Configuración</button>
@@ -29,21 +29,21 @@
 
 		<div id="config-tab" class="tab-content active">
 			<div class="config-section">
-				<h3>Configurar Entrenamiento</h3>
+				<h3>Configurar entrenamiento</h3>
 				<div class="config-item">
-					<label for="num-questions">Número de Preguntas:</label>
+					<label for="num-questions">Número de preguntas:</label>
 					<input type="number" id="num-questions" value="10" min="1" max="10">
 				</div>
 				<div class="config-item">
 					<label for="quiz-time">Tiempo (segundos):</label>
 					<input type="number" id="quiz-time" value="60" min="10" max="300">
 				</div>
-				<button id="start-quiz-button" class="button start-button">Iniciar Entrenamiento</button>
+				<button id="start-quiz-button" class="button start-button">Iniciar entrenamiento</button>
 			</div>
 		</div>
 
 		<div id="quiz-tab" class="tab-content">
-			<div class="timer" id="timer-area">Tiempo restante: 60s</div>
+			<div class="timer" id="timer-area">Tiempo restante: 00s</div>
 
 			<div id="quiz-content">
 				<div id="question-area">
@@ -69,7 +69,7 @@
 
 		<div id="progress-tab" class="tab-content">
 			<div class="session-history-container">
-				<h3 id="session-history-title">Historial de Sesión</h3>
+				<h3 id="session-history-title">Historial de sesión</h3>
 				<div id="session-history-list">
 				</div>
 				<button id="clear-history-button" class="button">Borrar historial</button>
@@ -78,17 +78,27 @@
 			</div>
 
 			<div class="progress-chart-container hidden">
-				<h3>Progreso de Intentos</h3>
+				<h3>Progreso de intentos</h3>
 				<div id="progress-chart">
 				</div>
 			</div>
-			<button id="download-csv-button" class="button mt-4">Descargar Historial (CSV)</button>
+			<button id="download-csv-button" class="button mt-4">Descargar historial (CSV)</button>
 		</div>
 
 		<div class="footer">
-			<p>Desarrollado por <span class="school-name">Escuela de Datos de Fundación SOL</span></p>
+			<p>Desarrollado por el equipo de la <span class="school-name">Escuela de Datos</span> de la <span
+					class="school-name">Fundación SOL</span> </p>
 		</div>
 	</div>
+
+	<div id="custom-message-overlay" class="overlay hidden">
+		<div id="custom-message-box" class="message-box">
+			<h4 id="message-title"></h4>
+			<p id="message-text"></p>
+			<button id="message-ok-button" class="button">Aceptar</button>
+		</div>
+	</div>
+
 
 	<script type="module" src="js/questions.js"></script>
 	<script type="module" src="js/quiz.js"></script>

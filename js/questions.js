@@ -113,7 +113,7 @@ export const originalQuizData = [
 		explanation: "La reactividad es la característica distintiva de Shiny que permite crear experiencias de usuario dinámicas e interactivas. Los outputs 'reaccionan' a los cambios en los inputs del usuario, actualizándose en tiempo real, lo que facilita la exploración de datos interactiva."
 	},
 	{
-		"question": "¿Cuál fue un caso notable que subrayó la importancia de la reproducibilidad en la investigación, mencionado en el texto?",
+		"question": "¿Cuál fue un caso notable que subrayó la importancia de la reproducibilidad en la investigación, mencionado en el Capítulo 44 del libro Fundamentos de ciencias de datos con R (Informes reproducibles con R Markdown y Quarto)?",
 		"options": {
 			"A": "El descubrimiento de la estructura del ADN.",
 			"B": "El escándalo de los ensayos de cáncer en Duke en 2011.",
@@ -121,7 +121,7 @@ export const originalQuizData = [
 			"D": "El desarrollo del framework Shiny."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto menciona explícitamente el escándalo de los ensayos de cáncer en Duke en 2011 como un caso que resalta la necesidad de la verificación de resultados por terceros y, por lo tanto, la reproducibilidad."
+		"explanation": "El capitulo 44, menciona explícitamente el escándalo de los ensayos de cáncer en Duke en 2011 como un caso que resalta la necesidad de la verificación de resultados por terceros y, por lo tanto, la reproducibilidad."
 	},
 	{
 		"question": "¿Qué herramientas se mencionan como facilitadoras para crear informes reproducibles con contenidos en ficheros de texto plano?",
@@ -132,7 +132,7 @@ export const originalQuizData = [
 			"D": "Shiny y leaflet."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto indica que 'R Markdown y Quarto permiten crear informes reproducibles', utilizando ficheros de texto plano que combinan código y texto explicativo."
+		"explanation": "'R Markdown y Quarto permiten crear informes reproducibles', utilizando ficheros de texto plano que combinan código y texto explicativo."
 	},
 	{
 		"question": "¿Cómo se pueden insertar resultados de R de forma 'inline' dentro del texto en R Markdown o Quarto?",
@@ -143,7 +143,7 @@ export const originalQuizData = [
 			"D": "Definiendo parámetros en el encabezado YAML."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto describe la inserción inline de resultados de R 'utilizando tildes graves, la letra r y una expresión de R imprimible como cadena de texto (r expresion_de_R)'."
+		"explanation": "La inserción inline de resultados de R 'utilizando tildes graves, la letra r y una expresión de R imprimible como cadena de texto (r expresion_de_R)'."
 	},
 	{
 		"question": "¿Qué permite la opción de parametrización en Quarto, definida en el encabezado YAML?",
@@ -165,7 +165,7 @@ export const originalQuizData = [
 			"D": "CTRL + C"
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto menciona que 'la ayuda contextual es muy útil, mostrando las opciones disponibles al comenzar a escribir o al pulsar CTRL+ESPACIO'."
+		"explanation": "En Fundamentos de ciencia de datos con R, se menciona que 'la ayuda contextual es muy útil, mostrando las opciones disponibles al comenzar a escribir o al pulsar CTRL+ESPACIO'."
 	},
 	{
 		"question": "¿Qué caracteres básicos se pueden usar para crear tablas simples en formato Markdown dentro de R Markdown o Quarto?",
@@ -176,7 +176,7 @@ export const originalQuizData = [
 			"D": "Comillas dobles (\") y simples (')."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto explica que para las tablas básicas 'se pueden usar guiones medios y barras verticales para separar filas y columnas'."
+		"explanation": "Para las tablas básicas 'se pueden usar guiones medios y barras verticales para separar filas y columnas'."
 	},
 	{
 		"question": "¿Qué función de qué paquete se menciona específicamente para formatear tablas de calidad en R Markdown según el formato de salida (HTML, PDF, Word)?",
@@ -187,18 +187,18 @@ export const originalQuizData = [
 			"D": "ggplot() del paquete ggplot2."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto sugiere usar 'funciones que formatean la tabla según el formato de salida... Funciones como kable del paquete knitr preparan automáticamente el formato según el fichero de salida'."
+		"explanation": "Se sugiere usar 'funciones que formatean la tabla según el formato de salida... Funciones como kable del paquete knitr preparan automáticamente el formato según el fichero de salida'."
 	},
 	{
 		"question": "¿Cómo se puede incluir información matemática en formato tabla utilizando LaTeX dentro de R Markdown?",
 		"options": {
 			"A": "Usando la función `math_table()`.",
-			"B": "Con la sintaxis `$$\begin{array}{} ... \end{array}$$`.",
+			"B": "Con la sintaxis `$$ \\begin{array}{} ... \\end{array}$$`.",
 			"C": "Mediante el paquete `latex2table`.",
 			"D": "Configurando la opción `results` del chunk como 'latex'."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto indica que 'Para incluir información matemática en formato tabla, se puede utilizar el entorno LaTeX dentro de R Markdown con la sintaxis $$\begin{array}{} ... \end{array}$$'."
+		"explanation": "Según Pedro Luque (2019), 'Para incluir información matemática en formato tabla, se puede utilizar el entorno LaTeX dentro de R Markdown con la sintaxis $$\begin{array}{} ... \end{array}$$'."
 	},
 	{
 		"question": "¿Cuál es el primer paso recomendado si la información para una tabla en R Markdown ya está en un formato digital reconocible por R (como CSV, Excel, RData)?",
@@ -209,7 +209,7 @@ export const originalQuizData = [
 			"D": "Usar librerías para facilitar la conversión a formato digital."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto dice que 'si la información ya está en un formato digital reconocible por R... el primer paso es importar los datos utilizando las funciones de las librerías básicas o especializadas de R'."
+		"explanation": "Según Pedro Luque (2019), 'si la información ya está en un formato digital reconocible por R... el primer paso es importar los datos utilizando las funciones de las librerías básicas o especializadas de R'."
 	},
 	{
 		"question": "¿Qué son los Addins en RStudio y para qué pueden servir?",
@@ -220,7 +220,7 @@ export const originalQuizData = [
 			"D": "Son opciones para publicar documentos en línea."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto explica que 'RStudio ofrece Addins, a los cuales se les pueden asociar combinaciones de teclas para un acceso más rápido'."
+		"explanation": "Según Pedro Luque (2019), 'RStudio ofrece Addins, a los cuales se les pueden asociar combinaciones de teclas para un acceso más rápido'."
 	},
 	{
 		"question": "¿Cómo debe comenzar la leyenda o subtítulo de una tabla en R Markdown según las indicaciones del texto?",
@@ -231,7 +231,7 @@ export const originalQuizData = [
 			"D": "Con una referencia a la fuente original."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto especifica que 'Las leyendas o subtítulos de las tablas en R Markdown comienzan con el término 'Tabla' en negrita, seguido del número de la tabla también en negrita'."
+		"explanation": "Según Pedro Luque (2019), especifica que 'Las leyendas o subtítulos de las tablas en R Markdown comienzan con el término 'Tabla' en negrita, seguido del número de la tabla también en negrita'."
 	},
 	{
 		"question": "¿Qué paquete, similar a `column_spec` para columnas, permite definir especificaciones para filas (como poner en negrita o cursiva) en tablas creadas con `kable`?",
@@ -242,10 +242,10 @@ export const originalQuizData = [
 			"D": "tidyr"
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto menciona que 'Con el paquete kableExtra, similar a column_spec para columnas, se pueden definir especificaciones para filas, como poner en negrita o cursiva una fila completa'."
+		"explanation": "El texto 'Cómo crear tablas con Rmarkdown' de Luque (2019),menciona que 'Con el paquete kableExtra, similar a column_spec para columnas, se pueden definir especificaciones para filas, como poner en negrita o cursiva una fila completa'."
 	},
 	{
-		"question": "¿Cuál es una ventaja clave de utilizar Shiny para crear Dashboards con R, según el texto?",
+		"question": "¿Cuál es una ventaja clave de utilizar Shiny para crear Dashboards con R, según el 'Mastering Shiny Build Interactive Apps...'?",
 		"options": {
 			"A": "Solo permite incluir gráficos tradicionales.",
 			"B": "Ofrece la posibilidad de incluir análisis complejos y una interfaz interactiva para el usuario.",
@@ -253,7 +253,7 @@ export const originalQuizData = [
 			"D": "Solo funciona dentro del entorno de RStudio."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto destaca que Shiny 'ofrece la ventaja de incluir mucho más que gráficos tradicionales, desde análisis simples hasta muy complejos, y proporcionar una interfaz para que el usuario interactúe directamente con la información presentada'."
+		"explanation": "El texto  de Hadley Wickham, destaca que Shiny 'ofrece la ventaja de incluir mucho más que gráficos tradicionales, desde análisis simples hasta muy complejos, y proporcionar una interfaz para que el usuario interactúe directamente con la información presentada'."
 	},
 	{
 		"question": "¿Cuáles son los dos elementos principales que crea el proyecto por defecto de Shiny en RStudio al comenzar uno nuevo?",
@@ -264,7 +264,7 @@ export const originalQuizData = [
 			"D": "data y visualization."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto indica que el proyecto por defecto en RStudio 'crea una estructura base con dos elementos principales: ui (interfaz de usuario) y server (lógica de negocio)'."
+		"explanation": "El texto 'Mastering Shiny Build Interactive Apps...' indica que el proyecto por defecto en RStudio 'crea una estructura base con dos elementos principales: ui (interfaz de usuario) y server (lógica de negocio)'."
 	},
 	{
 		"question": "¿Qué función se utiliza para correr una aplicación Shiny localmente en RStudio?",
@@ -275,7 +275,7 @@ export const originalQuizData = [
 			"D": "runApp()."
 		},
 		"correctAnswer": "D",
-		"explanation": "Según el texto, 'Para correr una aplicación Shiny localmente en RStudio, se puede usar la función runApp()'."
+		"explanation": "Según el de Hadley Wickham 'Mastering Shiny Build Interactive Apps, Reports, and Dashboards', 'Para correr una aplicación Shiny localmente en RStudio, se puede usar la función runApp()'."
 	},
 	{
 		"question": "¿En qué framework se basa Shiny para su diseño, aunque los usuarios de R no necesiten conocer sus detalles?",
@@ -286,7 +286,7 @@ export const originalQuizData = [
 			"D": "jQuery."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto menciona que 'Shiny se basa en el framework Bootstrap para su diseño, aunque los usuarios de R no necesiten conocer los detalles de Bootstrap para crear interfaces atractivas'."
+		"explanation": "El texto 'Mastering Shiny Build Interactive Apps...', menciona que 'Shiny se basa en el framework Bootstrap para su diseño, aunque los usuarios de R no necesiten conocer los detalles de Bootstrap para crear interfaces atractivas'."
 	},
 	{
 		"question": "¿Cómo facilita Shiny la creación de mapas interactivos dentro de R?",
@@ -297,7 +297,7 @@ export const originalQuizData = [
 			"D": "No tiene capacidades para crear mapas."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto afirma que 'Shiny facilita la creación de mapas interactivos utilizando librerías como leaflet dentro de R con relativamente pocas líneas de código'."
+		"explanation": "El texto 'Mastering Shiny Build Interactive Apps...', afirma que 'Shiny facilita la creación de mapas interactivos utilizando librerías como leaflet dentro de R con relativamente pocas líneas de código'."
 	},
 	{
 		"question": "¿Qué tecnología se menciona como una forma de simplificar la implementación de aplicaciones Shiny al no requerir la instalación de R en el entorno de ejecución?",
@@ -308,7 +308,7 @@ export const originalQuizData = [
 			"D": "Bases de datos SQL."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto indica que 'es posible desplegar aplicaciones Shiny utilizando contenedores Docker, lo que simplifica la implementación al no requerir la instalación de R en el entorno de ejecución'."
+		"explanation": "El texto 'Mastering Shiny Build Interactive Apps...', indica que 'es posible desplegar aplicaciones Shiny utilizando contenedores Docker, lo que simplifica la implementación al no requerir la instalación de R en el entorno de ejecución'."
 	},
 	{
 		"question": "¿A qué servidor se pueden subir por defecto las aplicaciones Shiny, facilitando su publicación?",
@@ -319,7 +319,7 @@ export const originalQuizData = [
 			"D": "Dropbox."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto especifica que 'Las aplicaciones Shiny se pueden subir por defecto al servidor de RStudio Connect'."
+		"explanation": "El texto 'Mastering Shiny Build Interactive Apps...', especifica que 'Las aplicaciones Shiny se pueden subir por defecto al servidor de RStudio Connect'."
 	},
 	{
 		"question": "¿Qué librería de R se utiliza para la creación de gráficos, mencionada como punto de partida para este tema?",
@@ -330,7 +330,7 @@ export const originalQuizData = [
 			"D": "tidyr."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto introduce el tema de gráficos diciendo que 'ggplot2 es una librería de R utilizada para la creación de gráficos'."
+		"explanation": "El texto, 'R para Ciencia de Datos',  introduce el tema de gráficos diciendo que 'ggplot2 es una librería de R utilizada para la creación de gráficos'."
 	},
 	{
 		"question": "¿Cuál es la función inicial que se llama para comenzar a crear un gráfico con ggplot2, y qué se especifica en ella?",
@@ -341,7 +341,7 @@ export const originalQuizData = [
 			"D": "draw() y se especifican los colores."
 		},
 		"correctAnswer": "C",
-		"explanation": "Según el texto, 'Para comenzar a crear un gráfico con ggplot2, primero se llama a la función ggplot() y se especifican los datos y las estéticas (variables a usar en el gráfico)'."
+		"explanation": "Según el texto 'R para Ciencia de Datos', 'Para comenzar a crear un gráfico con ggplot2, primero se llama a la función ggplot() y se especifican los datos y las estéticas (variables a usar en el gráfico)'."
 	},
 	{
 		"question": "¿Qué operador se utiliza en ggplot2 para añadir más capas al gráfico (como geometrías o elementos de formato)?",
@@ -352,7 +352,7 @@ export const originalQuizData = [
 			"D": "-"
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto indica que 'Las instrucciones en ggplot2 suelen seguir con el operador + para añadir más capas al gráfico'."
+		"explanation": "El texto 'R para Ciencia de Datos', indica que 'Las instrucciones en ggplot2 suelen seguir con el operador + para añadir más capas al gráfico'."
 	},
 	{
 		"question": "¿Qué geometría (`geom_...()`) es adecuada en ggplot2 para visualizar la correlación entre dos variables numéricas?",
@@ -363,7 +363,7 @@ export const originalQuizData = [
 			"D": "geom_histogram()."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto señala que 'El gráfico de puntos es adecuado para visualizar la correlación entre dos variables, y en ggplot2 se crea con geom_point()'."
+		"explanation": "El texto 'R para Ciencia de Datos', señala que 'El gráfico de puntos es adecuado para visualizar la correlación entre dos variables, y en ggplot2 se crea con geom_point()'."
 	},
 	{
 		"question": "¿Qué función se utiliza en ggplot2 para añadir texto y contexto a los gráficos, como el título, subtítulo y etiquetas de los ejes?",
@@ -374,7 +374,7 @@ export const originalQuizData = [
 			"D": "text()."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto explica que 'Para añadir texto y contexto a los gráficos, se utiliza la función labs() para definir el título (title), subtítulo (subtitle) y etiquetas de los ejes (x, y)'."
+		"explanation": "El texto 'R para Ciencia de Datos', explica que 'Para añadir texto y contexto a los gráficos, se utiliza la función labs() para definir el título (title), subtítulo (subtitle) y etiquetas de los ejes (x, y)'."
 	},
 	{
 		"question": "¿Qué función del paquete dplyr se utiliza específicamente para filtrar filas de un data frame según una o varias condiciones?",
@@ -385,7 +385,7 @@ export const originalQuizData = [
 			"D": "arrange()."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto establece claramente que 'La función filter() de dplyr se utiliza para filtrar filas de un data frame según una o varias condiciones'."
+		"explanation": "El texto 'Data Visualization and Exploration with R ' de Eric Palmer (2017) , establece claramente que 'La función filter() de dplyr se utiliza para filtrar filas de un data frame según una o varias condiciones'."
 	},
 	{
 		"question": "¿Qué función de dplyr se utiliza para ordenar las filas de un data frame por una o más columnas?",
@@ -396,7 +396,7 @@ export const originalQuizData = [
 			"D": "group_by()."
 		},
 		"correctAnswer": "C",
-		"explanation": "Según el texto, 'La función arrange() de dplyr se utiliza para ordenar las filas de un data frame por una o más columnas'."
+		"explanation": "Según el texto,'Data Visualization and Exploration with R ', 'La función arrange() de dplyr se utiliza para ordenar las filas de un data frame por una o más columnas'."
 	},
 	{
 		"question": "¿Qué función de dplyr se utiliza para encontrar y devolver las filas únicas de un data frame?",
@@ -407,7 +407,7 @@ export const originalQuizData = [
 			"D": "count()."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto describe que 'La función distinct() de dplyr encuentra y devuelve las filas únicas de un data frame'."
+		"explanation": "El texto 'Data Visualization and Exploration with R ', describe que 'La función distinct() de dplyr encuentra y devuelve las filas únicas de un data frame'."
 	},
 	{
 		"question": "¿Qué función de dplyr se utiliza para añadir nuevas columnas a un data frame o modificar las existentes?",
@@ -418,7 +418,7 @@ export const originalQuizData = [
 			"D": "rename()."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto indica que 'La función mutate() de dplyr añade nuevas columnas a un data frame o modifica las existentes'."
+		"explanation": "El texto 'Data Visualization and Exploration with R ', indica que 'La función mutate() de dplyr añade nuevas columnas a un data frame o modifica las existentes'."
 	},
 	{
 		"question": "¿Qué función de dplyr se utiliza para seleccionar un subconjunto de columnas de un data frame?",
@@ -429,7 +429,7 @@ export const originalQuizData = [
 			"D": "pull()."
 		},
 		"correctAnswer": "B",
-		"explanation": "Según el texto, 'La función select() de dplyr se utiliza para seleccionar un subconjunto de columnas de un data frame'."
+		"explanation": "Según el texto 'Going from Beginner to Advanced in the Tidyverse' de Christian Burkhart (2022), 'La función select() de dplyr se utiliza para seleccionar un subconjunto de columnas de un data frame'."
 	},
 	{
 		"question": "¿Qué función de dplyr se utiliza específicamente para cambiar los nombres de las columnas de un data frame?",
@@ -440,7 +440,7 @@ export const originalQuizData = [
 			"D": "arrange()."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto menciona que 'La función rename() de dplyr se utiliza para cambiar los nombres de las columnas de un data frame', aunque también señala que `select()` puede hacerlo."
+		"explanation": "El texto 'Going from Beginner to Advanced in the Tidyverse' , menciona que 'La función rename() de dplyr se utiliza para cambiar los nombres de las columnas de un data frame', aunque también señala que `select()` puede hacerlo."
 	},
 	{
 		"question": "¿Qué función de dplyr se utiliza para agrupar las filas de un data frame según los valores de una o más columnas, preparando para operaciones a nivel de grupo?",
@@ -451,7 +451,7 @@ export const originalQuizData = [
 			"D": "group_by()."
 		},
 		"correctAnswer": "D",
-		"explanation": "El texto explica que 'La función group_by() de dplyr agrupa las filas de un data frame según los valores de una o más columnas'."
+		"explanation": "El texto 'Going from Beginner to Advanced in the Tidyverse' , explica que 'La función group_by() de dplyr agrupa las filas de un data frame según los valores de una o más columnas'."
 	},
 	{
 		"question": "¿Qué función de dplyr se utiliza para resumir múltiples valores a un único valor por grupo (o para todo el data frame)?",
@@ -462,7 +462,7 @@ export const originalQuizData = [
 			"D": "distinct()."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto describe que 'La función summarise() de dplyr resume múltiples valores a un único valor por grupo... o para todo el data frame'."
+		"explanation": "El texto 'Going from Beginner to Advanced in the Tidyverse', describe que 'La función summarise() de dplyr resume múltiples valores a un único valor por grupo... o para todo el data frame'."
 	},
 	{
 		"question": "¿Qué paquete, que forma parte de tidyverse, contiene las funciones `pivot_longer()` y `pivot_wider()` para transformar datos entre formatos ancho y largo?",
@@ -473,7 +473,7 @@ export const originalQuizData = [
 			"D": "tidyr."
 		},
 		"correctAnswer": "D",
-		"explanation": "El texto menciona que 'La función pivot_longer() de tidyr (que forma parte de tidyverse)' y `pivot_wider()` pertenecen a este paquete."
+		"explanation": "El texto 'Going from Beginner to Advanced in the Tidyverse' , menciona que 'La función pivot_longer() de tidyr (que forma parte de tidyverse)' y `pivot_wider()` pertenecen a este paquete."
 	},
 	{
 		"question": "¿Qué función del paquete readr (incluido en tidyverse) se puede utilizar para importar datos directamente desde sitios web en RStudio, proporcionando la URL?",
@@ -484,7 +484,7 @@ export const originalQuizData = [
 			"D": "get_url()."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto indica que 'Para importar datos directamente desde sitios web en RStudio, se puede utilizar la función read_csv()... del paquete readr... proporcionando la URL'."
+		"explanation": "El texto 'Going from Beginner to Advanced in the Tidyverse', indica que 'Para importar datos directamente desde sitios web en RStudio, se puede utilizar la función read_csv()... del paquete readr... proporcionando la URL'."
 	},
 	{
 		"question": "¿Qué aspecto del código es fundamental para su claridad y legibilidad, según el texto, y se menciona como clave para lograrla?",
@@ -495,7 +495,7 @@ export const originalQuizData = [
 			"D": "Mantener todo el código en un solo archivo."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto señala que 'Escribir código claro y legible es fundamental, y la reescritura es clave para lograr claridad'."
+		"explanation": "El texto 'R para Ciencia de Datos', señala que 'Escribir código claro y legible es fundamental, y la reescritura es clave para lograr claridad'."
 	},
 	{
 		"question": "¿Qué se logra al crear funciones para encapsular código repetitivo, según el texto?",
@@ -506,7 +506,7 @@ export const originalQuizData = [
 			"D": "Hacer el código más difícil de leer."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto sugiere que 'Crear funciones para encapsular código repetitivo puede mejorar la organización y reducir errores'."
+		"explanation": "El texto 'R para Ciencia de Datos', sugiere que 'Crear funciones para encapsular código repetitivo puede mejorar la organización y reducir errores'."
 	},
 	{
 		"question": "¿Para qué se utilizan las ejecuciones condicionales (`if ... else`) en R?",
@@ -517,7 +517,7 @@ export const originalQuizData = [
 			"D": "Para importar datos."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto explica que 'Las ejecuciones condicionales (if ... else) en R se utilizan para ejecutar diferentes bloques de código según una condición'."
+		"explanation": "El texto 'R para Ciencia de Datos', explica que 'Las ejecuciones condicionales (if ... else) en R se utilizan para ejecutar diferentes bloques de código según una condición'."
 	},
 	{
 		"question": "¿Cómose puede agregar una nueva columna a un data frame existente en R, según las opciones mencionadas en el texto?",
@@ -528,7 +528,7 @@ export const originalQuizData = [
 			"D": "Solo usando el operador pipe (%>%)."
 		},
 		"correctAnswer": "B",
-		"explanation": "El texto indica que 'Para agregar una columna a un data frame existente, se puede hacer directamente asignando valores a una nueva columna usando el operador $, o utilizando funciones como mutate() de dplyr'."
+		"explanation": "El texto 'R para Ciencia de Datos', indica que 'Para agregar una columna a un data frame existente, se puede hacer directamente asignando valores a una nueva columna usando el operador $, o utilizando funciones como mutate() de dplyr'."
 	},
 	{
 		"question": "¿Qué sucede si se asigna `NULL` a una columna existente en un data frame en R?",
@@ -539,6 +539,6 @@ export const originalQuizData = [
 			"D": "Se convierte la columna a tipo lógico."
 		},
 		"correctAnswer": "C",
-		"explanation": "El texto menciona que 'Asignar NULL a una columna existente la elimina'."
+		"explanation": "El texto 'R para profesionales de los datos', de Carlos J. Gil Bellosta (2018) menciona que 'Asignar NULL a una columna existente la elimina'."
 	}
 ];

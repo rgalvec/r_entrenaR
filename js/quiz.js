@@ -321,7 +321,7 @@ function updateScoreDisplay() {
 		// Crear y añadir los botones de puntaje si no existen
 		const attemptedButton = document.createElement('span');
 		attemptedButton.classList.add('score-button', 'attempted');
-		attemptedButton.textContent = `Intentadas: ${attemptedQuestionsCount}`;
+		attemptedButton.textContent = `Preguntas: ${attemptedQuestionsCount}`;
 		scoreContainerElement.appendChild(attemptedButton);
 
 		const correctButton = document.createElement('span');
@@ -393,7 +393,7 @@ function endQuiz(timeRanOut) {
 	// Crear y añadir los botones de puntaje finales
 	const finalAttemptedButton = document.createElement('span');
 	finalAttemptedButton.classList.add('score-button', 'attempted');
-	finalAttemptedButton.textContent = `Intentadas: ${totalAttempted}`;
+	finalAttemptedButton.textContent = `Intentos: ${totalAttempted}`;
 	finalScoreContainer.appendChild(finalAttemptedButton);
 
 	const finalCorrectButton = document.createElement('span');
@@ -512,8 +512,8 @@ function displaySessionHistory() {
 		const sessionItem = document.createElement('div');
 		sessionItem.classList.add('session-item');
 		sessionItem.innerHTML = `
-                 <p><strong>Intento ${i + 1}:</strong></p>
-                 <p class="score-detail">Intentadas: ${result.attempted}, Correctas: ${result.correct}, Incorrectas: ${result.incorrect}</p>
+                 <p><strong>Prueba ${i + 1}:</strong></p>
+                 <p class="score-detail">Preguntas: ${result.attempted}, Correctas: ${result.correct}, Incorrectas: ${result.incorrect}</p>
                  ${result.timestamp ? `<p class="score-detail">Hora: ${new Date(result.timestamp).toLocaleString()}</p>` : ''}
              `;
 		sessionHistoryList.appendChild(sessionItem);
@@ -556,7 +556,7 @@ function downloadCSV() {
 	}
 
 	// Crear el encabezado del CSV
-	const headers = ["Intento", "Intentadas", "Correctas", "Incorrectas", "Hora"];
+	const headers = ["Prueba", "Preguntas", "Correctas", "Incorrectas", "Hora"];
 	let csvContent = headers.join(",") + "\n";
 
 	// Añadir los datos de cada intento
@@ -579,7 +579,7 @@ function downloadCSV() {
 	if (link.download !== undefined) { // Verificar si el atributo download es soportado
 		const url = URL.createObjectURL(blob);
 		link.setAttribute('href', url);
-		link.setAttribute('download', 'historial_quiz_r.csv');
+		link.setAttribute('download', 'historial_entrenamiento_r.csv');
 		link.style.visibility = 'hidden';
 		document.body.appendChild(link);
 		link.click();

@@ -1,17 +1,16 @@
-# 📊 Entramiento Interactivo: Fundamentos y uso de R para Análisis de Datos
-
-¡Bienvenido al Quiz Interactivo de Fundamentos de R! Esta aplicación está diseñada para ayudarte a poner a prueba y reforzar tus conocimientos sobre algunas de las herramientas más importantes en el ecosistema de R para el análisis de datos, la creación de informes reproducibles y el desarrollo de aplicaciones web interactivas.
+# 📊 Entramiento Interactivo: Fundamentos y uso de R para Trabajo con datos.
+¡Bienvenido al Entrenamiento Interactivo de Fundamentos de R! Esta aplicación está diseñada para ayudarte a poner a prueba y reforzar tus conocimientos sobre algunas de las herramientas más importantes en el ecosistema de R para el análisis de datos, la creación de informes reproducibles y el desarrollo de aplicaciones web interactivas.
 
 ## ✨ Descripción
 
-Este proyecto es una aplicación de quiz que carga preguntas desde un archivo de datos estructurado. El quiz se enfoca en conceptos clave y el uso práctico de:
+Este proyecto es una aplicación de entrenamiento (tipo quiz) que carga preguntas desde un archivo de datos estructurado. El quiz se enfoca en conceptos clave y el uso práctico de:
 
 * **R Markdown y Quarto:** Creación de informes y documentos dinámicos y reproducibles.
 * **Shiny:** Desarrollo de aplicaciones web interactivas y dashboards directamente en R.
 * **Tidyverse:** Manipulación, transformación y visualización de datos con paquetes como `dplyr`, `tidyr` y `ggplot2`.
 * Características del entorno **RStudio** relevantes para estas tareas.
 
-Es una herramienta ideal para estudiantes, investigadores o profesionales que están aprendiendo o ya utilizan R y desean consolidar su comprensión de estas herramientas esenciales.
+Es una herramienta ideal para personas que están aprendiendo o ya utilizan R y desean consolidar su comprensión de estas herramientas esenciales.
 
 ## 🚀 Características Principales
 
@@ -31,7 +30,11 @@ Es una herramienta ideal para estudiantes, investigadores o profesionales que es
     ```
     *(Reemplaza `<URL_DEL_REPOSITORIO>` y `<NOMBRE_DEL_DIRECTORIO_DEL_REPOSITORIO>` con la información real del proyecto si está alojado en un repositorio Git).*
 
-2.  **Instalar Dependencias:**
+2. **Visualizar desde el editor**
+
+	Puedes abrila con tu editor favorito y arrancar el archivo 'index.html' en tu navegador. 
+
+3.  **Instalar Dependencias:**
     Si la aplicación es una aplicación web construida con tecnologías como React, Vue, Angular u otro framework, necesitarás instalar las dependencias del proyecto (generalmente usando npm o yarn). Asegúrate de tener [Node.js](https://nodejs.org/) instalado.
     ```bash
     npm install
@@ -39,7 +42,7 @@ Es una herramienta ideal para estudiantes, investigadores o profesionales que es
     yarn install
     ```
 
-3.  **Ejecutar la Aplicación:**
+4.  **Ejecutar la Aplicación:**
     El comando para iniciar la aplicación dependerá de cómo esté configurado el proyecto. Los comandos comunes incluyen:
     ```bash
     npm start
@@ -68,3 +71,8 @@ La estructura es un array de objetos JavaScript, donde cada objeto representa un
   correctAnswer: "Letra de la respuesta correcta (ej: 'C')",
   explanation: "Explicación detallada de la respuesta."
 }
+```
+
+## Créditos
+
+	Este repositorio fue creado por el equipo de la [Escuela de Datos](https://aulavirtual.escuelasol.cl/escuela-de-datos#scrollTop=0) de la [Fundación SOL](www.fundacionsol.cl)

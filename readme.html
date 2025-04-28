@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -46,19 +80,19 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="entramiento-interactivo-fundamentos-de-r-para-análisis-de-datos" class="level1">
-<h1>📊 Entramiento Interactivo: Fundamentos de R para Análisis de Datos</h1>
-<p>¡Bienvenido al Quiz Interactivo de Fundamentos de R! Esta aplicación está diseñada para ayudarte a poner a prueba y reforzar tus conocimientos sobre algunas de las herramientas más importantes en el ecosistema de R para el análisis de datos, la creación de informes reproducibles y el desarrollo de aplicaciones web interactivas.</p>
+<section id="entramiento-interactivo-fundamentos-y-uso-de-r-para-trabajo-con-datos." class="level1">
+<h1>📊 Entramiento Interactivo: Fundamentos y uso de R para Trabajo con datos.</h1>
+<p>¡Bienvenido al Entrenamiento Interactivo de Fundamentos de R! Esta aplicación está diseñada para ayudarte a poner a prueba y reforzar tus conocimientos sobre algunas de las herramientas más importantes en el ecosistema de R para el análisis de datos, la creación de informes reproducibles y el desarrollo de aplicaciones web interactivas.</p>
 <section id="descripción" class="level2">
 <h2 class="anchored" data-anchor-id="descripción">✨ Descripción</h2>
-<p>Este proyecto es una aplicación de quiz que carga preguntas desde un archivo de datos estructurado. El quiz se enfoca en conceptos clave y el uso práctico de:</p>
+<p>Este proyecto es una aplicación de entrenamiento (tipo quiz) que carga preguntas desde un archivo de datos estructurado. El quiz se enfoca en conceptos clave y el uso práctico de:</p>
 <ul>
 <li><strong>R Markdown y Quarto:</strong> Creación de informes y documentos dinámicos y reproducibles.</li>
 <li><strong>Shiny:</strong> Desarrollo de aplicaciones web interactivas y dashboards directamente en R.</li>
 <li><strong>Tidyverse:</strong> Manipulación, transformación y visualización de datos con paquetes como <code>dplyr</code>, <code>tidyr</code> y <code>ggplot2</code>.</li>
 <li>Características del entorno <strong>RStudio</strong> relevantes para estas tareas.</li>
 </ul>
-<p>Es una herramienta ideal para estudiantes, investigadores o profesionales que están aprendiendo o ya utilizan R y desean consolidar su comprensión de estas herramientas esenciales.</p>
+<p>Es una herramienta ideal para personas que están aprendiendo o ya utilizan R y desean consolidar su comprensión de estas herramientas esenciales.</p>
 </section>
 <section id="características-principales" class="level2">
 <h2 class="anchored" data-anchor-id="características-principales">🚀 Características Principales</h2>
@@ -74,6 +108,8 @@ ul.task-list li input[type="checkbox"] {
 <p><em>(<strong>Nota:</strong> Estas instrucciones son generales y asumen una implementación típica de una aplicación web que consume los datos del quiz. Los pasos exactos pueden variar dependiendo del framework y la tecnología específica utilizada para construir la interfaz del quiz.)</em></p>
 <ol type="1">
 <li><p><strong>Clonar el Repositorio:</strong> <code>bash     git clone &lt;URL_DEL_REPOSITORIO&gt;     cd &lt;NOMBRE_DEL_DIRECTORIO_DEL_REPOSITORIO&gt;</code> <em>(Reemplaza <code>&lt;URL_DEL_REPOSITORIO&gt;</code> y <code>&lt;NOMBRE_DEL_DIRECTORIO_DEL_REPOSITORIO&gt;</code> con la información real del proyecto si está alojado en un repositorio Git).</em></p></li>
+<li><p><strong>Visualizar desde el editor</strong></p>
+<p>Puedes abrila con tu editor favorito y arrancar el archivo ‘index.html’ en tu navegador.</p></li>
 <li><p><strong>Instalar Dependencias:</strong> Si la aplicación es una aplicación web construida con tecnologías como React, Vue, Angular u otro framework, necesitarás instalar las dependencias del proyecto (generalmente usando npm o yarn). Asegúrate de tener <a href="https://nodejs.org/">Node.js</a> instalado. <code>bash     npm install     # o si usas yarn     yarn install</code></p></li>
 <li><p><strong>Ejecutar la Aplicación:</strong> El comando para iniciar la aplicación dependerá de cómo esté configurado el proyecto. Los comandos comunes incluyen: <code>bash     npm start     # o     yarn dev     # o     npm run serve</code> La aplicación debería abrirse en tu navegador web por defecto (comúnmente en <code>http://localhost:3000</code> o similar).</p></li>
 </ol>
@@ -82,7 +118,21 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="datos-del-entrenamiento">📚 Datos del entrenamiento</h2>
 <p>Las preguntas y respuestas del entrenamiento están definidas en el archivo <code>src/data/originalQuizData.js</code> (la ruta puede variar según la estructura del proyecto).</p>
 <p>La estructura es un array de objetos JavaScript, donde cada objeto representa una pregunta con el siguiente formato:</p>
-<p>```javascript { question: “Texto de la pregunta…”, options: { A: “Opción A”, B: “Opción B”, C: “Opción C”, D: “Opción D” }, correctAnswer: “Letra de la respuesta correcta (ej: ‘C’)”, explanation: “Explicación detallada de la respuesta.” }</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">question</span><span class="op">:</span> <span class="st">"Texto de la pregunta..."</span><span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">options</span><span class="op">:</span> {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">A</span><span class="op">:</span> <span class="st">"Opción A"</span><span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">B</span><span class="op">:</span> <span class="st">"Opción B"</span><span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">C</span><span class="op">:</span> <span class="st">"Opción C"</span><span class="op">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D</span><span class="op">:</span> <span class="st">"Opción D"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">correctAnswer</span><span class="op">:</span> <span class="st">"Letra de la respuesta correcta (ej: 'C')"</span><span class="op">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">explanation</span><span class="op">:</span> <span class="st">"Explicación detallada de la respuesta."</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="créditos" class="level2">
+<h2 class="anchored" data-anchor-id="créditos">Créditos</h2>
+<pre><code>Este repositorio fue creado por el equipo de la ![Escuela de Datos](https://aulavirtual.escuelasol.cl/escuela-de-datos#scrollTop=0) de la ![Fundación SOL](www.fundacionsol.cl)</code></pre>
 </section>
 </section>
 

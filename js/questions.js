@@ -520,7 +520,7 @@ export const originalQuizData = [
 		"explanation": "El texto 'R para Ciencia de Datos', explica que 'Las ejecuciones condicionales (if ... else) en R se utilizan para ejecutar diferentes bloques de código según una condición'."
 	},
 	{
-		"question": "¿Cómose puede agregar una nueva columna a un data frame existente en R, según las opciones mencionadas en el texto?",
+		"question": "¿Cómo se puede agregar una nueva columna a un data frame existente en R, según las opciones mencionadas en el texto 'R para Ciencia de Datos'?",
 		"options": {
 			"A": "Solo usando la función `add_column()`.",
 			"B": "Directamente asignando valores con el operador `$`, o usando `mutate()` de dplyr.",

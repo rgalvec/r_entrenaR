@@ -172,7 +172,7 @@ function loadQuestion() {
 	// Habilitar el botón de responder
 	submitButton.disabled = false;
 
-	// Actualizar el puntaje mostrado (Intentadas, Correctas, Incorrectas) en el contenedor principal
+	// Actualizar la visualización del puntaje (Intentadas, Correctas, Incorrectas) en el contenedor principal
 	updateScoreDisplay();
 
 	// Deshabilitar opciones si el tiempo se agotó (aunque endQuiz debería manejar esto)
@@ -321,7 +321,7 @@ function endQuiz(timeRanOut) {
 	stopTimer();
 	timerAreaElement.classList.add('hidden'); // Ocultar el temporizador al finalizar
 
-	// **Corrección:** Ocultar explícitamente el contenedor principal de puntaje
+	// Ocultar explícitamente el contenedor principal de puntaje
 	scoreContainerElement.classList.add('hidden');
 
 	// Ocultar el contenido del quiz
@@ -376,13 +376,13 @@ function endQuiz(timeRanOut) {
 	finalCorrectButton.textContent = `Correctas: ${finalCorrect}`;
 	finalScoreContainer.appendChild(finalCorrectButton);
 
-	const finalIncorrectButton = document.classList.add('score-button', 'incorrect');
+	const finalIncorrectButton = document.createElement('span');
+	finalIncorrectButton.classList.add('score-button', 'incorrect');
 	finalIncorrectButton.textContent = `Incorrectas: ${finalIncorrect}`;
 	finalScoreContainer.appendChild(finalIncorrectButton);
 
 
 	// Limpiar el contenido anterior de la pantalla final y añadir los nuevos elementos
-	// **Corrección:** Asegurarse de limpiar completamente la pantalla final antes de añadir nuevos elementos
 	endScreenElement.innerHTML = '';
 	endScreenElement.appendChild(endTitle);
 	endScreenElement.appendChild(finalScoreContainer); // Añadir el contenedor de botones de puntaje finales
@@ -396,41 +396,45 @@ function endQuiz(timeRanOut) {
 	summaryTitle.textContent = 'Resumen de Preguntas Respondidas';
 	summarySection.appendChild(summaryTitle);
 
-	// Iterar solo sobre las preguntas que fueron presentadas en este quiz
-	// currentQuestionIndex es el número de preguntas que se intentaron/vieron
-	for (let i = 0; i < currentQuestionIndex; i++) {
-		const questionData = shuffledQuizData[i]; // Obtener la pregunta del array mezclado
+	// **Corrección:** Iterar sobre el número de preguntas intentadas (attemptedQuestionsCount)
+	for (let i = 0; i < attemptedQuestionsCount; i++) {
+		// Asegurarse de que el índice i sea válido para shuffledQuizData
+		if (i < shuffledQuizData.length) {
+			const questionData = shuffledQuizData[i]; // Obtener la pregunta del array mezclado
 
-		const summaryItem = document.createElement('div');
-		summaryItem.classList.add('summary-item');
+			const summaryItem = document.createElement('div');
+			summaryItem.classList.add('summary-item');
 
-		const questionText = document.createElement('p');
-		questionText.innerHTML = `<strong>Pregunta ${i + 1}:</strong> ${questionData.question}`; // Usar i+1 para el número de pregunta en el resumen
-		summaryItem.appendChild(questionText);
+			const questionText = document.createElement('p');
+			questionText.innerHTML = `<strong>Pregunta ${i + 1}:</strong> ${questionData.question}`; // Usar i+1 para el número de pregunta en el resumen
+			summaryItem.appendChild(questionText);
 
-		const correctAnswerElement = document.createElement('p');
-		// Encontrar el texto de la respuesta correcta usando la clave
-		const correctAnswerText = questionData.options[questionData.correctAnswer];
-		// **Corrección:** Mostrar solo el texto de la respuesta correcta sin la letra indicadora
-		correctAnswerElement.innerHTML = `<span class="correct-answer">Respuesta Correcta: ${correctAnswerText}</span>`;
-		summaryItem.appendChild(correctAnswerElement);
+			const correctAnswerElement = document.createElement('p');
+			// Encontrar el texto de la respuesta correcta usando la clave
+			const correctAnswerText = questionData.options[questionData.correctAnswer];
+			// Mostrar solo el texto de la respuesta correcta sin la letra indicadora
+			correctAnswerElement.innerHTML = `<span class="correct-answer">Respuesta Correcta: ${correctAnswerText}</span>`;
+			summaryItem.appendChild(correctAnswerElement);
 
-		const explanationElement = document.createElement('p');
-		explanationElement.classList.add('explanation');
-		explanationElement.textContent = `Explicación: ${questionData.explanation}`;
-		summaryItem.appendChild(explanationElement);
+			const explanationElement = document.createElement('p');
+			explanationElement.classList.add('explanation');
+			explanationElement.textContent = `Explicación: ${questionData.explanation}`;
+			summaryItem.appendChild(explanationElement);
 
-		summarySection.appendChild(summaryItem);
+			summarySection.appendChild(summaryItem);
+		}
 	}
 
 
-	endScreenElement.appendChild(summarySection); // Añadir la sección de resumen a la pantalla final
+	// Añadir la sección de resumen a la pantalla final
+	endScreenElement.appendChild(summarySection);
 	// --- Fin de la sección de resumen ---
 
 
 	// Mostrar el botón de reiniciar
 	restartButton.classList.remove('hidden');
-	endScreenElement.appendChild(restartButton); // Añadir el botón de reiniciar a la pantalla final
+	// Añadir el botón de reiniciar a la pantalla final
+	endScreenElement.appendChild(restartButton);
 
 	// Guardar el resultado de la sesión en localStorage
 	saveSessionResult({
@@ -448,6 +452,14 @@ function endQuiz(timeRanOut) {
 		timestamp: new Date().toISOString(),
 		quizId: 'r_markdown_shiny_quiz' // Identificador del quiz
 	});
+}
+
+// Función para guardar el resultado de la sesión en localStorage
+function saveSessionResult(result) {
+	const results = JSON.parse(localStorage.getItem('quizResults') || '[]');
+	results.push(result);
+	localStorage.setItem('quizResults', JSON.stringify(results));
+	displaySessionHistory(); // Actualizar la visualización del historial
 }
 
 // Función para cargar y mostrar el historial de sesiones

@@ -250,8 +250,7 @@ function checkAnswer() {
 	explanationElement.textContent = explanation;
 	feedbackAreaElement.appendChild(explanationElement);
 
-	// Incrementar el contador de preguntas intentadas
-	attemptedQuestionsCount++;
+	attemptedQuestionsCount++; // Incrementar el contador de preguntas intentadas *después* de procesar la respuesta
 
 	// Ocultar el botón de responder y mostrar el de siguiente
 	submitButton.classList.add('hidden');
@@ -396,7 +395,7 @@ function endQuiz(timeRanOut) {
 	summaryTitle.textContent = 'Resumen de Preguntas Respondidas';
 	summarySection.appendChild(summaryTitle);
 
-	// **Corrección:** Iterar sobre el número de preguntas intentadas (attemptedQuestionsCount)
+	// Iterar sobre el número de preguntas intentadas (attemptedQuestionsCount)
 	for (let i = 0; i < attemptedQuestionsCount; i++) {
 		// Asegurarse de que el índice i sea válido para shuffledQuizData
 		if (i < shuffledQuizData.length) {
@@ -697,37 +696,28 @@ function drawProgressChart() {
 		.style("stroke", "white"); // Borde blanco
 
 
-	// --- Eliminar funcionalidad de Tooltip ---
-	// Se elimina la creación del elemento tooltip en window.onload y los event listeners mouseover/mouseout aquí.
-	// Si se desea una alternativa, se puede descomentar el código de etiquetas estáticas.
+	// --- Añadir Leyenda ---
+	const legend = svg.append("g")
+		.attr("font-family", "sans-serif")
+		.attr("font-size", 10)
+		.attr("text-anchor", "start") // Alinear texto al inicio
+		.selectAll("g")
+		.data([{ color: "#4caf50", text: "Correctas" }, { color: "#ff9800", text: "Incorrectas" }]) // Datos para la leyenda
+		.enter().append("g")
+		.attr("transform", (d, i) => `translate(10, ${i * 20})`); // Posicionar cada item de la leyenda
 
-	// Opcional: Añadir etiquetas de texto estático sobre los puntos
-	// Esto puede saturar el gráfico si hay muchos intentos.
-	/*
-	attempts.selectAll(".text-correct")
-		.data(d => [d]) // Bind data to each point group
-		.enter().append("text")
-		.attr("class", "bar-label") // Reutilizar clase si es necesario
-		.attr("x", d => xScale(d.attempt))
-		.attr("y", d => yScale(d.correct) - 8) // Posicionar encima del punto
-		.attr("dy", ".35em")
-		.text(d => d.correct)
-		.style("fill", "#4caf50") // Color del texto (verde)
-		.style("text-anchor", "middle")
-		.style("font-size", "0.7em");
+	legend.append("rect")
+		.attr("x", width - 100) // Posición X del cuadrado de color (ajustar según necesidad)
+		.attr("width", 19)
+		.attr("height", 19)
+		.attr("fill", d => d.color);
 
-	attempts.selectAll(".text-incorrect")
-		 .data(d => [d]) // Bind data to each point group
-		.enter().append("text")
-		.attr("class", "bar-label") // Reutilizar clase si es necesario
-		.attr("x", d => xScale(d.attempt))
-		.attr("y", d => yScale(d.incorrect) - 8) // Posicionar encima del punto
-		 .attr("dy", ".35em")
-		.text(d => d.incorrect)
-		.style("fill", "#ff9800") // Color del texto (naranja)
-		.style("text-anchor", "middle")
-		.style("font-size", "0.7em");
-	*/
+	legend.append("text")
+		.attr("x", width - 75) // Posición X del texto (ajustar según necesidad)
+		.attr("y", 9.5)
+		.attr("dy", "0.32em")
+		.text(d => d.text);
+	// --- Fin de Leyenda ---
 
 
 	// Ajustar el tamaño del SVG para que sea responsivo (básico)

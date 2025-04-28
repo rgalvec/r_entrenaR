@@ -334,7 +334,6 @@ body.dark-mode .summary-item .explanation {
 	/* Texto de explicación claro */
 }
 
-
 /* Estilos para el modo oscuro */
 body.dark-mode {
 	background-color: #1a202c;
@@ -525,7 +524,7 @@ body.dark-mode #dark-mode-toggle {
 
 body.dark-mode #dark-mode-toggle:hover {
 	background-color: #cc5200;
-	/* Mantener naranja más oscuro en hover */
+	border-color: #993f00;
 }
 
 /* Estilos para las pestañas */
@@ -563,7 +562,7 @@ body.dark-mode .tabs {
 	text-align: center;
 	/* Asegurar que el texto esté centrado */
 	min-width: 0;
-	/* Permite que los botones se encojan */
+	/* Permite que los botones se encojen */
 }
 
 @media (min-width: 640px) {
@@ -753,7 +752,7 @@ body.dark-mode .progress-chart-container svg {
 
 body.dark-mode .progress-chart-container .axis text {
 	fill: #e0e0e0;
-	/* Color de texto del eje en modo oscuro */
+	/* Color de texto del eje en modo oscuro - Mejorado contraste */
 }
 
 .progress-chart-container .axis path,
@@ -777,7 +776,7 @@ body.dark-mode .progress-chart-container .axis line {
 
 .progress-chart-container .line-incorrect {
 	fill: none;
-	stroke: #ff6600;
+	stroke: #ff9800;
 	/* Naranja para línea incorrecta */
 	stroke-width: 2;
 }
@@ -794,6 +793,17 @@ body.dark-mode .progress-chart-container .dot {
 	/* Fondo oscuro para los puntos */
 	stroke: #e2e8f0;
 	/* Borde claro para los puntos */
+}
+
+/* Estilos para la leyenda del gráfico */
+.progress-chart-container svg text {
+	fill: #333;
+	/* Color de texto por defecto para la leyenda */
+}
+
+body.dark-mode .progress-chart-container svg text {
+	fill: #e0e0e0;
+	/* Color de texto claro para la leyenda en modo oscuro */
 }
 
 

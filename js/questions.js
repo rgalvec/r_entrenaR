@@ -154,7 +154,7 @@ export const originalQuizData = [
 			"D": "Definir las opciones de los chunks de código."
 		},
 		"correctAnswer": "C",
-		"explanation": "Según el texto, 'Quarto ofrece la opción de parametrización para informes automatizados que pueden cambiar según valores como ficheros de datos o fechas. Estos parámetros se definen en el encabezado YAML'."
+		"explanation": "Según el texto,'Informes reproducibles con R Markdown y Quarto', 'Quarto ofrece la opción de parametrización para informes automatizados que pueden cambiar según valores como ficheros de datos o fechas. Estos parámetros se definen en el encabezado YAML'."
 	},
 	{
 		"question": "¿Qué combinación de teclas es útil para obtener ayuda contextual al escribir opciones de chunks en R Markdown o Quarto?",
